@@ -1,5 +1,9 @@
 components:
-- components: []
+- components:
+  - layout_properties: {grid_position: 'ITKJJP,BYYQND'}
+    name: label_1
+    properties: {text: super sexy tutor only zone}
+    type: Label
   layout_properties: {slot: default}
   name: content_panel
   properties: {}

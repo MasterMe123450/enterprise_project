@@ -1,7 +1,34 @@
 allow_embedding: false
 db_schema:
+  homework:
+    client: search
+    columns:
+    - admin_ui: {order: 0, width: 200}
+      client_hidden: false
+      name: Student
+      target: users
+      type: link_single
+    - admin_ui: {order: 1, width: 200}
+      client_hidden: false
+      name: Work Returned
+      type: number
+    - admin_ui: {order: 2, width: 200}
+      client_hidden: false
+      name: Work Overdue
+      type: number
+    - admin_ui: {order: 3, width: 200}
+      client_hidden: false
+      name: Work Due Soon
+      type: number
+    - admin_ui: {order: 4, width: 200}
+      client_hidden: false
+      name: Work Pending Marks
+      type: number
+    indexes: []
+    server: full
+    title: Homework
   users:
-    client: none
+    client: search
     columns:
     - admin_ui: {order: 0, width: 200}
       client_hidden: false
@@ -27,6 +54,10 @@ db_schema:
       client_hidden: true
       name: confirmed_email
       type: bool
+    - admin_ui: {order: 6, width: 200}
+      client_hidden: true
+      name: signed_up
+      type: datetime
     indexes: []
     server: full
     title: Users
@@ -44,8 +75,16 @@ services:
 - client_config: {enable_v2: true}
   server_config: {}
   source: /runtime/services/tables.yml
-- client_config: {allow_signup: false, confirm_email: false, enable_automatically: true, require_secure_passwords: true, use_email: true}
-  server_config: {user_table: users}
+- client_config: {allow_signup: true, confirm_email: false, enable_automatically: false, require_secure_passwords: false, use_email: true}
+  server_config:
+    email_content:
+      reset_password:
+        html: |-
+          <p>Hi there,</p>
+          <p>You have requested a password reset for your account {{email}}. To reset your password, click the link below:</p>
+          <p>{{reset_link}}</p>
+          <p>This link will expire in ten minutes.</p>
+    user_table: users
   source: /runtime/services/anvil/users.yml
 startup: {module: LogIn_Page, type: form}
 startup_form: null
