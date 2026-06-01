@@ -64,6 +64,14 @@ db_schema:
       client_hidden: true
       name: signed_up
       type: datetime
+    - admin_ui: {}
+      client_hidden: null
+      name: last_login
+      type: datetime
+    - admin_ui: {}
+      client_hidden: null
+      name: n_password_failures
+      type: number
     indexes: []
     server: full
     title: Users

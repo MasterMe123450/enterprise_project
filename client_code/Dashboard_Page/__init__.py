@@ -42,10 +42,13 @@ class Dashboard_Page(Dashboard_PageTemplate):
     if currentuserhwdata["Work Overdue"] > 0:
       self.Homework_Overdue.background = "crimson"
 
-    
+    #Displays a preview of the lastest things uploaded
+    #maybe max of 3?
     for row in app_tables.homeworkfiles.search():
       self.Work_Preview.add_component(Label(text= "Homework Task: " + row["Homework_Title"], align="center"))
-      self.Work_Preview.add_component(Label(text="Due: " +str(row["Due_Date"]), align="center"))
+      date = str(row["Due_Date"])
+      shortdate = date.split("+") #space to omit time as well
+      self.Work_Preview.add_component(Label(text="Due: " +shortdate[0], align="center"))
       self.Work_Preview.add_component(Link(url=row["Homework_File"], align="center",text="Download"))
     
   @handle("Logout_Button", "click")

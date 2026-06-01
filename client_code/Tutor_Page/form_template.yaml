@@ -10,7 +10,7 @@ components:
     type: FileLoader
   - layout_properties: {grid_position: 'DPTDVR,IQGUQN'}
     name: label_2
-    properties: {text: Set Due Date(enter as dd-mm-yyyy please) (you must have a file uploaded)}
+    properties: {text: Set Due Date(enter as dd-mm-yyyy please) (It will set the due date of the file uploaded)}
     type: Label
   - layout_properties: {grid_position: 'EQQPDY,ORHKXJ'}
     name: DueDateInput
