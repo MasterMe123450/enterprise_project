@@ -27,6 +27,24 @@ db_schema:
     indexes: []
     server: full
     title: Homework
+  homeworkfiles:
+    client: full
+    columns:
+    - admin_ui: {order: 0, width: 200}
+      client_hidden: false
+      name: Homework_Title
+      type: string
+    - admin_ui: {order: 1, width: 200}
+      client_hidden: false
+      name: Homework_File
+      type: media
+    - admin_ui: {order: 2, width: 200}
+      client_hidden: false
+      name: Due_Date
+      type: datetime
+    indexes: []
+    server: full
+    title: HomeworkFiles
   users:
     client: search
     columns:
@@ -38,22 +56,10 @@ db_schema:
       client_hidden: true
       name: enabled
       type: bool
-    - admin_ui: {order: 2, width: 200}
-      client_hidden: true
-      name: last_login
-      type: datetime
     - admin_ui: {order: 3, width: 200}
       client_hidden: true
       name: password_hash
       type: string
-    - admin_ui: {order: 4, width: 200}
-      client_hidden: true
-      name: n_password_failures
-      type: number
-    - admin_ui: {order: 5, width: 200}
-      client_hidden: true
-      name: confirmed_email
-      type: bool
     - admin_ui: {order: 6, width: 200}
       client_hidden: true
       name: signed_up
@@ -62,9 +68,9 @@ db_schema:
     server: full
     title: Users
 dependencies: []
-metadata: {description: '', title: BEAM portal}
-name: fuckass enterprise project
-package_name: fuckass_enterprise_project
+metadata: {description: '', logo_img: 'asset:mcfyicon.jpg', title: BEAM portal}
+name: enterprise project
+package_name: enterprise_project
 renamed: true
 runtime_options:
   client_version: '3'

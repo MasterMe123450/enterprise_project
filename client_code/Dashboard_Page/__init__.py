@@ -42,8 +42,19 @@ class Dashboard_Page(Dashboard_PageTemplate):
     if currentuserhwdata["Work Overdue"] > 0:
       self.Homework_Overdue.background = "crimson"
 
+    
+    for row in app_tables.homeworkfiles.search():
+      self.Work_Preview.add_component(Label(text= "Homework Task: " + row["Homework_Title"], align="center"))
+      self.Work_Preview.add_component(Label(text="Due: " +str(row["Due_Date"]), align="center"))
+      self.Work_Preview.add_component(Link(url=row["Homework_File"], align="center",text="Download"))
+    
   @handle("Logout_Button", "click")
   def Logout_Button_click(self, **event_args):
     """This method is called when the button is clicked"""
     anvil.users.logout()
     open_form('LogIn_Page')
+
+  @handle("tutor_redirect", "click")
+  def tutor_redirect_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    open_form(('Tutor_Page'))

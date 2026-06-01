@@ -20,11 +20,8 @@ import anvil.server
 def tutor_perms():
   tutor = 'ethan.tay1@education.nsw.gov.au'
   if anvil.users.get_user() is None:
-    print("Nobody is logged in.")
     return False
   elif anvil.users.get_user()['email'] == tutor:
-    print(f"{tutor} is allowed to see this.")
     return True
   else:
-    print("The user is a student.")
     return False
