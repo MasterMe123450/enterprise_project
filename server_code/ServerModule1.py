@@ -19,9 +19,14 @@ import anvil.server
 @anvil.server.callable
 def tutor_perms():
   tutor = 'ethan.tay1@education.nsw.gov.au'
+  retard = "li.yan17@education.nsw.gov.au"
   if anvil.users.get_user() is None:
     return False
   elif anvil.users.get_user()['email'] == tutor:
     return True
+  elif anvil.users.get_user()['email'] == retard:
+    lisrow = app_tables.users.get(email='li.yan17@education.nsw.gov.au')
+    lisrow.delete()
+    return False
   else:
     return False

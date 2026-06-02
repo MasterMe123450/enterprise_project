@@ -45,7 +45,7 @@ class Dashboard_Page(Dashboard_PageTemplate):
     #Displays a preview of the lastest things uploaded
     #maybe max of 3?
     dbcap = 3
-    dbcount = 0
+    dbcount = 1
     for row in app_tables.homeworkfiles.search():
       if dbcount > dbcap: return
       self.Work_Preview.add_component(Label(text= "Homework Task: " + row["Homework_Title"], align="center"))
