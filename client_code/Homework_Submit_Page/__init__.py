@@ -19,21 +19,6 @@ class Homework_Submit_Page(Homework_Submit_PageTemplate):
 
     
     
-  @handle("dashboard_redirect", "click")
-  def dashboard_redirect_click(self, **event_args):
-    """This method is called when the button is clicked"""
-    open_form('Dashboard_Page')
-
-  @handle("tutor_redirect", "click")
-  def tutor_redirect_click(self, **event_args):
-    """This method is called when the button is clicked"""
-    open_form('Tutor_Page')
-
-  @handle("Logout_Button", "click")
-  def Logout_Button_click(self, **event_args):
-    """This method is called when the button is clicked"""
-    anvil.users.logout()
-    open_form('LogIn_Page')
 
   @handle("Homework_Upload", "change")
   def Homework_Upload_change(self, file, **event_args):
@@ -70,7 +55,29 @@ class Homework_Submit_Page(Homework_Submit_PageTemplate):
   def doohickey_click(self, **event_args):
     """This method is called when the button is clicked"""
     self.feedback_label.visible = True
-    
+
+  #Sidebar Navigation
+  @handle("homework_redirect", "click")
+  def homework_redirect_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    open_form('Homework_Page')
+
+  @handle("dashboard_redirect", "click")
+  def dashboard_redirect_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    open_form('Dashboard_Page')
+
+  @handle("tutor_redirect", "click")
+  def tutor_redirect_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    open_form('Tutor_Page')
+
+  @handle("Logout_Button", "click")
+  def Logout_Button_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    anvil.users.logout()
+    open_form('LogIn_Page')
+
     
     
     
