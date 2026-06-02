@@ -63,4 +63,4 @@ class Tutor_Page(Tutor_PageTemplate):
   @handle("homework_redirect", "click")
   def homework_redirect_click(self, **event_args):
     """This method is called when the button is clicked"""
-    open_form('Homework_Submit_Page')
+    open_form('Homework_Page')
