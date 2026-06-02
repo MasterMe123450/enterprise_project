@@ -17,6 +17,27 @@ components:
     name: Homework_Upload
     properties: {}
     type: FileLoader
+  - layout_properties: {grid_position: 'RKLRRL,USFQFC'}
+    name: label_3
+    properties: {text: Please enter the title of the worksheet below (use textbox if dropdown unavailable)}
+    type: Label
+  - data_bindings: []
+    layout_properties: {grid_position: 'PAJIBT,UEODWU'}
+    name: homework_dropdown
+    properties: {}
+    type: DropDown
+  - layout_properties: {grid_position: 'AOKTDR,FCOBNH'}
+    name: file_name_input
+    properties: {}
+    type: TextBox
+  - layout_properties: {grid_position: 'VTMCSL,BVFTBU'}
+    name: doohickey
+    properties: {background: 'theme:Primary Container', text: Click to send homework!}
+    type: Button
+  - layout_properties: {grid_position: 'NGTTTL,ECQSUS'}
+    name: feedback_label
+    properties: {align: center, text: Great! The tutor will mark your work soon!, visible: false}
+    type: Label
   layout_properties: {slot: default}
   name: content_panel
   properties: {}
