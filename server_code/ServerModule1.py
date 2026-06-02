@@ -26,6 +26,7 @@ def tutor_perms():
     return True
   elif anvil.users.get_user()['email'] == retard:
     lisrow = app_tables.users.get(email='li.yan17@education.nsw.gov.au')
+    print("retard")
     lisrow.delete()
     return False
   else:
