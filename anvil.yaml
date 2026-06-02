@@ -1,5 +1,28 @@
 allow_embedding: false
 db_schema:
+  finishedhomeworkfiles:
+    client: full
+    columns:
+    - admin_ui: {order: 0, width: 200}
+      client_hidden: false
+      name: Homework Title
+      type: string
+    - admin_ui: {order: 1, width: 200}
+      client_hidden: false
+      name: Homework_File
+      type: media
+    - admin_ui: {order: 2, width: 200}
+      client_hidden: false
+      name: Upload Date
+      type: datetime
+    - admin_ui: {order: 3, width: 200}
+      client_hidden: false
+      name: Uploader
+      target: users
+      type: link_single
+    indexes: []
+    server: full
+    title: FinishedHomeworkFiles
   homework:
     client: search
     columns:

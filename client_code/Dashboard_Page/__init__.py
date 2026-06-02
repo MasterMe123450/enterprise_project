@@ -65,3 +65,8 @@ class Dashboard_Page(Dashboard_PageTemplate):
   def tutor_redirect_click(self, **event_args):
     """This method is called when the button is clicked"""
     open_form(('Tutor_Page'))
+
+  @handle("homework_redirect", "click")
+  def homework_redirect_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    open_form('Homework_Page')

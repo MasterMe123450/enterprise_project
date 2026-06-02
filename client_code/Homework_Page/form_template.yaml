@@ -1,0 +1,91 @@
+components:
+- components:
+  - components:
+    - layout_properties: {}
+      name: label_1
+      properties: {align: center, bold: true, font_size: 50, foreground: 'theme:Primary', text: Homework}
+      type: Label
+    layout_properties: {grid_position: 'ZVLICM,JQDMNO'}
+    name: linear_panel_1
+    properties: {background: 'theme:Primary Container'}
+    type: LinearPanel
+  - layout_properties: {grid_position: 'DHGAGZ,ZXFVTS'}
+    name: label_2
+    properties: {text: 'Upload completed homework files here:'}
+    type: Label
+  - layout_properties: {grid_position: 'TBKQTR,QQNCVM'}
+    name: Homework_Upload
+    properties: {}
+    type: FileLoader
+  layout_properties: {slot: default}
+  name: content_panel
+  properties: {}
+  type: ColumnPanel
+- layout_properties: {slot: nav-right}
+  name: navbar_links
+  properties: {}
+  type: FlowPanel
+- components:
+  - layout_properties: {grid_position: 'DNYHRM,WSRNOR'}
+    name: dashboard_redirect
+    properties:
+      background: theme:Primary Container
+      spacing:
+        margin: [null, null, '35', null]
+      text: Dashboard
+    type: Button
+  - layout_properties: {grid_position: 'ABZRPF,OGIWDM'}
+    name: homework_redirect
+    properties:
+      background: theme:Primary Container
+      spacing:
+        margin: ['35', null, '35', null]
+      text: Homework
+    type: Button
+  - layout_properties: {grid_position: 'ABEZKS,UOUZQT'}
+    name: worksheet_redirect
+    properties:
+      background: theme:Primary Container
+      border: ''
+      spacing:
+        margin: ['35', null, '35', '0']
+      text: Worksheets
+    type: Button
+  - layout_properties: {grid_position: 'QTDJVE,GHVBHG'}
+    name: statistics_redirect
+    properties:
+      background: theme:Primary Container
+      spacing:
+        margin: ['35', null, '35', null]
+      text: Statistics
+    type: Button
+  - layout_properties: {grid_position: 'VBJXDV,RDORVL'}
+    name: tutor_redirect
+    properties:
+      background: theme:Primary Container
+      font_size: 12
+      spacing:
+        margin: ['35', null, '35', null]
+        padding: [null, null, null, null]
+      text: |-
+        SUPER SPECIAL
+        TUTOR BUTTON
+      visible: false
+    type: Button
+  - layout_properties: {grid_position: 'SINVCV,ATIDOR'}
+    name: Logout_Button
+    properties:
+      background: theme:Primary Container
+      spacing:
+        margin: ['100', null, null, null]
+        padding: [null, null, null, null]
+      text: Sign Out
+    type: Button
+  layout_properties: {slot: left-nav}
+  name: column_panel_1
+  properties: {}
+  type: ColumnPanel
+container:
+  properties: {html: '@theme:standard-page.html'}
+  type: HtmlTemplate
+is_package: true

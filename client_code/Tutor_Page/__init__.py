@@ -59,3 +59,8 @@ class Tutor_Page(Tutor_PageTemplate):
     for row in app_tables.homeworkfiles.search(): 
       if row == hwrow:
         row.delete()
+
+  @handle("homework_redirect", "click")
+  def homework_redirect_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    open_form('Homework_Page')
