@@ -1,5 +1,6 @@
 from ._anvil_designer import Dashboard_PageTemplate
 from anvil import *
+from datetime import *
 import anvil.server
 import anvil.tables as tables
 import anvil.tables.query as q
@@ -15,9 +16,38 @@ class Dashboard_Page(Dashboard_PageTemplate):
       self.tutor_redirect.visible = True
 
     #Top dashboard summary info
+    #get the user hwtables
     currentuser = anvil.users.get_user()
     currentuserhwdata = app_tables.homework.get(Student=currentuser)
-  
+    hwlist = currentuserhwdata["Homework_List"]
+    #count the number of submissions and overdue
+    notdonecounter = 0
+    overduecounter = 0
+    donecounter = 0
+    returnedcounter = 0
+    #first, check if true, if it is, the work is done!
+    
+    if hwlist is None: return #THIS IS JUST SO WHEN TESTING/EXCEPTION IT DOESN'T THROW AN ERROR
+    for key, value in hwlist.items():
+      if value is True:
+        donecounter +=1
+      else: #buuuuuut, if its false, check its date to see if its upcoming or overdue
+        hwdd = app_tables.homeworkfiles.get(Homework_Title=key)
+        duedate = hwdd['Due_Date']
+        currentdate = datetime.now(timezone.utc)
+        print(currentdate)
+        print(duedate)
+        if duedate < currentdate:
+          overduecounter+=1
+        else:
+          notdonecounter+=1
+
+    
+    currentuserhwdata['Work Overdue'] = overduecounter
+    currentuserhwdata['Work Pending Marks'] = donecounter
+    currentuserhwdata['Work Due Soon'] = notdonecounter
+
+    #each text box displays data
     if currentuserhwdata["Work Returned"] > 1:
       self.Homework_Returned.text = str(currentuserhwdata["Work Returned"]) + " tasks returned!"
     else:

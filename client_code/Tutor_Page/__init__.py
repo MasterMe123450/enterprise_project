@@ -44,7 +44,11 @@ class Tutor_Page(Tutor_PageTemplate):
     for row in app_tables.homework.search():
       if row["Homework_List"] is None:
         row['Homework_List'] = {}
-      row['Homework_List'][hwrow["Homework_Title"]] = False
+      #idk why you have to write the data in this stupid fucking way but it works so im not changing it  
+      newname = hwrow["Homework_Title"]
+      currentlist = row["Homework_List"]
+      currentlist[newname] = False
+      row['Homework_List'] = currentlist
     self.file_name_input_feedback.visible = True
 
   @handle("delete_button", "click")
