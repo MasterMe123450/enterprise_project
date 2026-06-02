@@ -44,12 +44,16 @@ class Dashboard_Page(Dashboard_PageTemplate):
 
     #Displays a preview of the lastest things uploaded
     #maybe max of 3?
+    dbcap = 3
+    dbcount = 0
     for row in app_tables.homeworkfiles.search():
+      if dbcount > dbcap: return
       self.Work_Preview.add_component(Label(text= "Homework Task: " + row["Homework_Title"], align="center"))
       date = str(row["Due_Date"])
-      shortdate = date.split("+") #space to omit time as well
+      shortdate = date.split(" ") #space to omit time, + to include time
       self.Work_Preview.add_component(Label(text="Due: " +shortdate[0], align="center"))
       self.Work_Preview.add_component(Link(url=row["Homework_File"], align="center",text="Download"))
+      dbcount += 1
     
   @handle("Logout_Button", "click")
   def Logout_Button_click(self, **event_args):

@@ -44,3 +44,18 @@ class Tutor_Page(Tutor_PageTemplate):
     """This method is called when the button is clicked"""
     anvil.users.logout()
     open_form('LogIn_Page')
+
+  @handle("file_name_input", "pressed_enter")
+  def file_name_input_pressed_enter(self, **event_args):
+    """This method is called when the user presses Enter in this text box"""
+    hwrow = app_tables.homeworkfiles.get(Homework_Title = self.file_loader_1.file.name)
+    hwrow["Homework_Title"] = self.file_name_input.text 
+    self.file_name_input_feedback.visible = True
+
+  @handle("delete_button", "click")
+  def delete_button_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    hwrow = app_tables.homeworkfiles.get(Homework_Title = self.file_name_input.text)
+    for row in app_tables.homeworkfiles.search(): 
+      if row == hwrow:
+        row.delete()

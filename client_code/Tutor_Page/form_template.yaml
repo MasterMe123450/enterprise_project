@@ -20,6 +20,26 @@ components:
     name: upload_feedback
     properties: {text: The work has been uploaded for students., visible: false}
     type: Label
+  - layout_properties: {grid_position: 'VGKIIE,XKTWQV'}
+    name: label_3
+    properties: {text: Set Task Name (it will set the name of the file uploaded)}
+    type: Label
+  - layout_properties: {grid_position: 'QPHTXW,OXMTNH'}
+    name: file_name_input
+    properties: {}
+    type: TextBox
+  - layout_properties: {grid_position: 'HNINAU,ZMOTXR'}
+    name: file_name_input_feedback
+    properties: {text: The work title has been updated., visible: false}
+    type: Label
+  - layout_properties: {grid_position: 'SHTXRD,VEBTVW'}
+    name: label_4
+    properties: {text: Click this button to delete all tasks with the above title for students.}
+    type: Label
+  - layout_properties: {grid_position: 'JLSWEW,QKGIDI'}
+    name: delete_button
+    properties: {background: 'theme:Error', foreground: 'theme:On Primary', text: Delete this file}
+    type: Button
   layout_properties: {slot: default}
   name: content_panel
   properties: {}
