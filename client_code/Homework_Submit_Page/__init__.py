@@ -1,4 +1,4 @@
-from ._anvil_designer import Homework_PageTemplate
+from ._anvil_designer import Homework_Submit_PageTemplate
 from anvil import *
 import anvil.server
 from datetime import *
@@ -8,7 +8,7 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 
 
-class Homework_Page(Homework_PageTemplate):
+class Homework_Submit_Page(Homework_Submit_PageTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     super().__init__(**properties)
