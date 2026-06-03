@@ -20,6 +20,10 @@ db_schema:
       name: Uploader
       target: users
       type: link_single
+    - admin_ui: {order: 4, width: 200}
+      client_hidden: false
+      name: Marked_File
+      type: media
     indexes: []
     server: full
     title: FinishedHomeworkFiles
@@ -99,6 +103,10 @@ db_schema:
       client_hidden: null
       name: n_password_failures
       type: number
+    - admin_ui: {order: 9, width: 200}
+      client_hidden: false
+      name: Name
+      type: string
     indexes: []
     server: full
     title: Users

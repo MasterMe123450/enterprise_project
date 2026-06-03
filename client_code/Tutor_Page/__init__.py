@@ -16,41 +16,20 @@ class Tutor_Page(Tutor_PageTemplate):
       self.tutor_redirect.visible = True
     # Any code you write here will run before the form opens.
 
-  #File Upload
-  @handle("file_loader_1", "change")
-  def file_loader_1_change(self, file, **event_args):
-    """This method is called when a new file is loaded into this FileLoader"""
-    app_tables.homeworkfiles.add_row(Homework_File=file, Homework_Title=file.name)
+  
 
-#When there is a file in the file upload, and a date in the textbox, it adds/changes a duedate for that file
-  @handle("DueDateInput", "pressed_enter")
-  def DueDateInput_pressed_enter(self, **event_args):
-    """This method is called when the user presses Enter in this text box"""
-    hwrow = app_tables.homeworkfiles.get(Homework_Title = self.file_loader_1.file.name)
-    duedate = self.DueDateInput.text
-    duedateformat = datetime.strptime(duedate, "%d-%m-%Y")
-    hwrow["Due_Date"] = duedateformat
-    self.upload_feedback.visible = True
+
     
 
 
 
-  @handle("file_name_input", "pressed_enter")
-  def file_name_input_pressed_enter(self, **event_args):
-    """This method is called when the user presses Enter in this text box"""
-    hwrow = app_tables.homeworkfiles.get(Homework_Title = self.file_loader_1.file.name)
-    hwrow["Homework_Title"] = self.file_name_input.text 
 
-    for row in app_tables.homework.search():
-      if row["Homework_List"] is None:
-        row['Homework_List'] = {}
-      #idk why you have to write the data in this stupid fucking way but it works so im not changing it  
-      newname = hwrow["Homework_Title"]
-      currentlist = row["Homework_List"]
-      currentlist[newname] = False
-      row['Homework_List'] = currentlist
-    self.file_name_input_feedback.visible = True
 
+
+
+
+
+  
   @handle("delete_button", "click")
   def delete_button_click(self, **event_args):
     """This method is called when the button is clicked"""
@@ -59,6 +38,31 @@ class Tutor_Page(Tutor_PageTemplate):
       if row == hwrow:
         row.delete()
 
+
+  
+  @handle("doohickey_button", "click")
+  def doohickey_button_click(self, **event_args):
+    #File Upload
+    hwrow = app_tables.homeworkfiles.add_row(Homework_File=self.file_loader_1.file, Homework_Title=self.file_loader_1.file.name)
+    
+    #When there is a file in the file upload, and a date in the textbox, it adds/changes a duedate for that file
+    duedate = self.DueDateInput.text
+    duedateformat = datetime.strptime(duedate, "%d-%m-%Y")
+    hwrow["Due_Date"] = duedateformat
+    self.upload_feedback.visible = True
+
+    hwrow["Homework_Title"] = self.file_name_input.text 
+
+    for row in app_tables.homework.search():
+      if row["Homework_List"] is None:
+        row['Homework_List'] = {}
+      #idk why you have to write the data in this stupid fucking way but it works so im not changing it  
+      newname = hwrow["Homework_Title"]
+      currentlist = row["Homework_List"]
+      #0 for not done,1 for submitted, 2 for returned
+      currentlist[newname] = 0
+      row['Homework_List'] = currentlist
+    self.file_name_input_feedback.visible = True
   
   #Sidebar Navigation
   @handle("dashboard_redirect", "click")
@@ -76,3 +80,11 @@ class Tutor_Page(Tutor_PageTemplate):
   def homework_redirect_click(self, **event_args):
     """This method is called when the button is clicked"""
     open_form('Homework_Page')
+
+  @handle("Marking_Redirect", "click")
+  def Marking_Redirect_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    open_form('Tutor_Marking_Page')
+
+
+

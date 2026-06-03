@@ -29,14 +29,14 @@ class Dashboard_Page(Dashboard_PageTemplate):
     
     if hwlist is None: return #THIS IS JUST SO WHEN TESTING/EXCEPTION IT DOESN'T THROW AN ERROR
     for key, value in hwlist.items():
-      if value is True:
+      if value == 1:
         donecounter +=1
+      elif value == 2:
+        returnedcounter +=1        
       else: #buuuuuut, if its false, check its date to see if its upcoming or overdue
         hwdd = app_tables.homeworkfiles.get(Homework_Title=key)
         duedate = hwdd['Due_Date']
         currentdate = datetime.now(timezone.utc)
-        print(currentdate)
-        print(duedate)
         if duedate < currentdate:
           overduecounter+=1
         else:
@@ -46,7 +46,7 @@ class Dashboard_Page(Dashboard_PageTemplate):
     currentuserhwdata['Work Overdue'] = overduecounter
     currentuserhwdata['Work Pending Marks'] = donecounter
     currentuserhwdata['Work Due Soon'] = notdonecounter
-
+    currentuserhwdata['Work Returned'] = returnedcounter
     #each text box displays data
     if currentuserhwdata["Work Returned"] > 1:
       self.Homework_Returned.text = str(currentuserhwdata["Work Returned"]) + " tasks returned!"
@@ -83,7 +83,7 @@ class Dashboard_Page(Dashboard_PageTemplate):
       donechecklist = donecheckrow['Homework_List']
       hwtitle = row['Homework_Title']
       donecheck = donechecklist[hwtitle]
-      if donecheck is True: continue #if done do not show
+      if donecheck != 0: continue #if done do not show
       
       self.Work_Preview.add_component(Label(text= "Homework Task: " + row["Homework_Title"], align="center"))
       date = str(row["Due_Date"])

@@ -34,6 +34,7 @@ class Homework_Page(Homework_PageTemplate):
     open_form('LogIn_Page')
 
   @handle("Homework_Container", "show")
+  #NOT DONE
   def Homework_Container_show(self, **event_args):
     """This method is called when the FlowPanel is shown on the screen"""
     for row in app_tables.homeworkfiles.search():
@@ -42,7 +43,7 @@ class Homework_Page(Homework_PageTemplate):
       donechecklist = donecheckrow['Homework_List']
       hwtitle = row['Homework_Title']
       donecheck = donechecklist[hwtitle]
-      if donecheck is True: continue #if done do not show
+      if donecheck != 0: continue #if done do not show
         
       xyp = XYPanel(width=250, height=250, border="solid 1px")
       self.Homework_Container.add_component(xyp)
@@ -62,9 +63,8 @@ class Homework_Page(Homework_PageTemplate):
       dlink = Link(text="Download", align = "left", url=row['Homework_File'])
       xyp.add_component(dlink, x=150, y=202)
 
-  def redirect(self, **event_args):
-    open_form('Homework_Submit_Page')
 
+  #DONE
   @handle("Homework_Complete_Container", "show")
   def Homework_Complete_Container_show(self, **event_args):
     """This method is called when the FlowPanel is shown on the screen"""
@@ -74,7 +74,7 @@ class Homework_Page(Homework_PageTemplate):
       donechecklist = donecheckrow['Homework_List']
       hwtitle = row['Homework_Title']
       donecheck = donechecklist[hwtitle]
-      if donecheck is False: continue #if done do not show
+      if donecheck != 1: continue #if not done do not show
 
       xyp = XYPanel(width=250, height=250, border="solid 1px")
       self.Homework_Complete_Container.add_component(xyp)
@@ -92,3 +92,10 @@ class Homework_Page(Homework_PageTemplate):
       
       dlink = Link(text="Download", align = "left", url=row['Homework_File'])
       xyp.add_component(dlink, x=150, y=202)
+
+
+
+
+
+  def redirect(self, **event_args):
+    open_form('Homework_Submit_Page')
