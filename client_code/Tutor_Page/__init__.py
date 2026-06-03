@@ -52,7 +52,7 @@ class Tutor_Page(Tutor_PageTemplate):
     self.upload_feedback.visible = True
 
     hwrow["Homework_Title"] = self.file_name_input.text 
-
+    hwrow['Total_Marks'] = int(self.file_name_input.text) #make this a number check
     for row in app_tables.homework.search():
       if row["Homework_List"] is None:
         row['Homework_List'] = {}

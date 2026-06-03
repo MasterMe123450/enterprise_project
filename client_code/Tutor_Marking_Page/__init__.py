@@ -23,10 +23,11 @@ class Tutor_Marking_Page(Tutor_Marking_PageTemplate):
     for row in app_tables.finishedhomeworkfiles.search():
       hwlist.append(row['Homework_Title'])
     uniquehw = list(dict.fromkeys(hwlist))
-    self.tag = {'hwfp':{}}
+    #this is genuinely some bullshit i do not fully comprehend, but it works.
+    self.tag = {'hwfp':{}, 'cardf':{}, 'cardt':{}, 'cardb':{}}
     for i in uniquehw:
-      title = Label(text=str(i))
-      fp = FlowPanel(border="solid 2px purple")
+      title = Label(text= "Worksheet: " + str(i), bold = True, font_size= 24)
+      fp = FlowPanel(border= "solid 2px purple")
       self.add_component(title)
       self.tag['hwfp'][i] = fp
       self.add_component(fp)
@@ -39,21 +40,45 @@ class Tutor_Marking_Page(Tutor_Marking_PageTemplate):
       ud = str(row["Upload Date"])
       ud = ud.split(" ")
       titlelbl = Label(text = "Uploaded: " + ud[0],align = "center")
-      xyp.add_component(titlelbl, x=20, y=10)
+      xyp.add_component(titlelbl, x=20, y=30)
 
       uid = row['Uploader']["Name"]
       uidlbl = Label(text = "Uploader: " + uid, align="center")
-      xyp.add_component(uidlbl, x=20, y=30)
+      xyp.add_component(uidlbl, x=20, y=10)
 
       fl = FileLoader(text="Upload marked work", border="solid 1px")
-      xyp.add_component(fl, x=15, y=100)
+      xyp.add_component(fl, x=15, y=80)
+      self.tag['cardf'][row] = fl
+      
+      txt = TextBox(text="input mark here", border="solid 1px", type= "number")
+      xyp.add_component(txt, x=15, y=140)
+      self.tag['cardt'][row] = txt
       
       btn = Button(text="Return", align="right", background="#EADDFF")
-      xyp.add_component(btn, x=10, y=200)
+      self.tag['cardb'][row] = btn
+      btn.add_event_handler('click',self.sendmarkedwork)
+      xyp.add_component(btn, x=140, y=200)
 
       dlink = Link(text="Download", align = "left", url=row['Homework_File'])
-      xyp.add_component(dlink, x=150, y=202)
+      xyp.add_component(dlink, x=20, y=202)
 
+  def sendmarkedwork(self, **event_args):
+    for row in app_tables.finishedhomeworkfiles.search():
+      
+      markupload = self.tag['cardt'][row] 
+      fileupload = self.tag['cardf'][row]
+      print(markupload.text)
+      if markupload.text is not None and fileupload.file is not None:
+        row['Marked_File'] = fileupload.file
+        cuser = row['Uploader'] 
+        cuserhw = app_tables.homework.get(Student=cuser)
+        cuserhwlist = cuserhw['Homework_List']
+        cuserhwlist[row["Homework_Title"]] = 2
+        cuserhw['Homework_List'] = cuserhwlist
+      
+      if markupload.text is not None and fileupload.file is not None:
+        row['Marks'] = markupload.text
+  
   @handle("dashboard_redirect", "click")
   def dashboard_redirect_click(self, **event_args):
     """This method is called when the button is clicked"""
@@ -78,4 +103,4 @@ class Tutor_Marking_Page(Tutor_Marking_PageTemplate):
   @handle("tutor1_redirect", "click")
   def tutor1_redirect_click(self, **event_args):
     """This method is called when the button is clicked"""
-  open_form('Tutor_Page')
+    open_form('Tutor_Page')
