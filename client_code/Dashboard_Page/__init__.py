@@ -77,7 +77,14 @@ class Dashboard_Page(Dashboard_PageTemplate):
     dbcap = 3
     dbcount = 1
     for row in app_tables.homeworkfiles.search():
-      if dbcount > dbcap: return
+      if dbcount > dbcap: return #if at cap do not show
+        
+      donecheckrow = app_tables.homework.get(Student=currentuser)
+      donechecklist = donecheckrow['Homework_List']
+      hwtitle = row['Homework_Title']
+      donecheck = donechecklist[hwtitle]
+      if donecheck is True: continue #if done do not show
+      
       self.Work_Preview.add_component(Label(text= "Homework Task: " + row["Homework_Title"], align="center"))
       date = str(row["Due_Date"])
       shortdate = date.split(" ") #space to omit time, + to include time

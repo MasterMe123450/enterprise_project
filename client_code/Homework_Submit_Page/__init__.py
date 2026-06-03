@@ -49,7 +49,16 @@ class Homework_Submit_Page(Homework_Submit_PageTemplate):
   def homework_dropdown_change(self, **event_args):
     """This method is called when an item is selected"""
     upload_row = app_tables.finishedhomeworkfiles.get(Homework_Title = self.Homework_Upload.file.name)
-    upload_row['Homework_Title'] = self.homework_dropdown.selected_value
+    uploadtitle =  self.homework_dropdown.selected_value
+    upload_row['Homework_Title'] = uploadtitle
+    cuser = anvil.users.get_user()
+    hwlistrow = app_tables.homework.get(Student=cuser)
+    print(hwlistrow)
+    hwlist = hwlistrow["Homework_List"]
+    hwlist[uploadtitle] = True
+    print(hwlist)
+    hwlistrow['Homework_List'] = hwlist
+    
 
   @handle("doohickey", "click")
   def doohickey_click(self, **event_args):
