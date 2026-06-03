@@ -99,3 +99,27 @@ class Homework_Page(Homework_PageTemplate):
 
   def redirect(self, **event_args):
     open_form('Homework_Submit_Page')
+
+  @handle("Homework_Returned_Container", "show")
+  def Homework_Returned_Container_show(self, **event_args):
+    """This method is called when the FlowPanel is shown on the screen"""
+    for row in app_tables.homeworkfiles.search():
+      currentuser = anvil.users.get_user()
+      donecheckrow = app_tables.homework.get(Student=currentuser)
+      donechecklist = donecheckrow['Homework_List']
+      hwtitle = row['Homework_Title']
+      donecheck = donechecklist[hwtitle]
+      if donecheck != 2: continue #if not done do not show
+      markedrow = app_tables.finishedhomeworkfiles.get(Homework_Title=hwtitle, Uploader=currentuser)
+      xyp = XYPanel(width=250, height=250, border="solid 1px")
+      self.Homework_Returned_Container.add_component(xyp)
+
+      titlelbl = Label(text = row["Homework_Title"],align = "center")
+      xyp.add_component(titlelbl, x=20, y=10)
+      
+      mark = markedrow['Marks']
+      marklbl = Label(text = "Mark: " + str(mark) + "/" + str(row['Total_Marks']), align= "center")
+      xyp.add_component(marklbl, x=20, y=202)
+        
+      dlink = Link(text="Download", align = "left", url=markedrow['Marked_File'])
+      xyp.add_component(dlink, x=150, y=202)
