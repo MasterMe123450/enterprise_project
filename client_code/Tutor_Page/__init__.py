@@ -23,7 +23,14 @@ class Tutor_Page(Tutor_PageTemplate):
     for row in app_tables.homeworkfiles.search(): 
       if row == hwrow:
         row.delete()
-
+        #NO clue if the ones below work, kinda just gonna leave it there
+    for row in app_tables.finishedhomeworkfiles.search():
+      if row["Homework_Title"] == hwrow['Homework_Title']:
+        row.delete()
+    for row in app_tables.homework.search():
+      hwlist = row['Homework_List']
+      hwlist.pop(hwrow['Homework_Title'])
+      row['Homework_List'] = hwlist
 
   
   @handle("doohickey_button", "click")

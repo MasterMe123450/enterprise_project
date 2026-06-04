@@ -71,7 +71,8 @@ class Dashboard_Page(Dashboard_PageTemplate):
     #Change colour of overdue label if there is work to be done!
     if currentuserhwdata["Work Overdue"] > 0:
       self.Homework_Overdue.background = "crimson"
-
+    if currentuserhwdata["Work Returned"]>0:
+      self.Homework_Returned.background = "#90EE90"
     #Displays a preview of the lastest things uploaded
     #maybe max of 3?
     dbcap = 3
@@ -84,7 +85,7 @@ class Dashboard_Page(Dashboard_PageTemplate):
       hwtitle = row['Homework_Title']
       donecheck = donechecklist[hwtitle]
       if donecheck != 0: continue #if done do not show
-      
+      self.templbl2.visible = False
       self.Work_Preview.add_component(Label(text= "Homework Task: " + row["Homework_Title"], align="center"))
       date = str(row["Due_Date"])
       shortdate = date.split(" ") #space to omit time, + to include time
