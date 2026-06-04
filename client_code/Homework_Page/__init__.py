@@ -1,5 +1,6 @@
 from ._anvil_designer import Homework_PageTemplate
 from anvil import *
+from anvil import tableau
 import anvil.server
 import anvil.users
 import anvil.tables as tables

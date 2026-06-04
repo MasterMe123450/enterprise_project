@@ -1,5 +1,6 @@
 from ._anvil_designer import Tutor_PageTemplate
 from anvil import *
+from anvil import tableau
 from datetime import *
 import anvil.server
 import anvil.users
