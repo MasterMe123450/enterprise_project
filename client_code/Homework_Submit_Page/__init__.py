@@ -43,7 +43,7 @@ class Homework_Submit_Page(Homework_Submit_PageTemplate):
     upload_row = app_tables.finishedhomeworkfiles.add_row()
     upload_row['Homework_File'] = self.Homework_Upload.file
     upload_row['Homework_Title'] = self.Homework_Upload.file.name
-    print(upload_row['Homework_Title'])
+
     upload_row['Uploader'] = anvil.users.get_user()
 
     date = datetime.now()
@@ -54,14 +54,14 @@ class Homework_Submit_Page(Homework_Submit_PageTemplate):
 
     #SELECTED 
     uploadtitle = self.homework_dropdown.selected_value
-    print(uploadtitle)
+
     upload_row['Homework_Title'] = uploadtitle
     cuser = anvil.users.get_user()
     hwlistrow = app_tables.homework.get(Student=cuser)
-    print(hwlistrow)
+
     hwlist = hwlistrow["Homework_List"]
     hwlist[uploadtitle] = 1
-    print(hwlist)
+
     hwlistrow['Homework_List'] = hwlist
 
     

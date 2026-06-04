@@ -66,7 +66,6 @@ class Tutor_Marking_Page(Tutor_Marking_PageTemplate):
     for row in app_tables.finishedhomeworkfiles.search():
       markupload = self.tag['cardt'][row] 
       fileupload = self.tag['cardf'][row]
-      print(markupload.text)
       if markupload.text is not None and fileupload.file is not None:
         row['Marked_File'] = fileupload.file
         cuser = row['Uploader'] 
