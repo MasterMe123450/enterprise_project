@@ -1,6 +1,5 @@
 from ._anvil_designer import Homework_Submit_PageTemplate
 from anvil import *
-from anvil import tableau
 import anvil.server
 from datetime import *
 import anvil.users

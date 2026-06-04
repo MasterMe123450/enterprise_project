@@ -1,6 +1,5 @@
 from ._anvil_designer import Dashboard_PageTemplate
 from anvil import *
-from anvil import tableau
 from datetime import *
 import anvil.server
 import anvil.tables as tables

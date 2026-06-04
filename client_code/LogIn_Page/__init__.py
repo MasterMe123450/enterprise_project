@@ -1,6 +1,5 @@
 from ._anvil_designer import LogIn_PageTemplate
 from anvil import *
-from anvil import tableau
 import anvil.server
 import anvil.tables as tables
 import anvil.tables.query as q
