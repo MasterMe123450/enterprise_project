@@ -17,6 +17,7 @@ class Worksheet_Page(Worksheet_PageTemplate):
       self.worksheet_file_loader.visible = True
       self.delete_button.visible = True
       self.delete_textbox.visible = True
+      self.tutor_upload.visible = True
     # Any code you write here will run before the form opens.
 
 

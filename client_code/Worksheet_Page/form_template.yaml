@@ -19,7 +19,7 @@ components:
     type: FileLoader
   - layout_properties: {grid_position: 'GGTQOF,KOPSYE'}
     name: tutor_upload
-    properties: {background: 'theme:Primary Container', text: Add to this page}
+    properties: {background: 'theme:Primary Container', text: Add to this page, visible: false}
     type: Button
   - layout_properties: {grid_position: 'DCQEBZ,QFRXVZ'}
     name: label_3

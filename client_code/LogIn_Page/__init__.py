@@ -11,8 +11,12 @@ class LogIn_Page(LogIn_PageTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     super().__init__(**properties)
-    user = anvil.users.login_with_form()
-    if anvil.users.get_user() != None:
+    anvil.users.login_with_form()
+    if anvil.users.get_user() is not None:
+      currentuser = anvil.users.get_user()
+      currentuserhwdata = app_tables.homework.get(Student=currentuser)
+      if currentuserhwdata is None:
+        app_tables.homework.add_row(Student=currentuser)
       open_form('Dashboard_Page')
       
     else: 

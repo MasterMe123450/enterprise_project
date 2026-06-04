@@ -27,20 +27,20 @@ class Dashboard_Page(Dashboard_PageTemplate):
     returnedcounter = 0
     #first, check if true, if it is, the work is done!
     
-    if hwlist is None: return #THIS IS JUST SO WHEN TESTING/EXCEPTION IT DOESN'T THROW AN ERROR
-    for key, value in hwlist.items():
-      if value == 1:
-        donecounter +=1
-      elif value == 2:
-        returnedcounter +=1        
-      else: #buuuuuut, if its false, check its date to see if its upcoming or overdue
-        hwdd = app_tables.homeworkfiles.get(Homework_Title=key)
-        duedate = hwdd['Due_Date']
-        currentdate = datetime.now(timezone.utc)
-        if duedate < currentdate:
-          overduecounter+=1
-        else:
-          notdonecounter+=1
+    if hwlist is not None: #THIS IS JUST SO WHEN TESTING/EXCEPTION IT DOESN'T THROW AN ERROR
+      for key, value in hwlist.items():
+        if value == 1:
+          donecounter +=1
+        elif value == 2:
+          returnedcounter +=1        
+        else: #buuuuuut, if its false, check its date to see if its upcoming or overdue
+          hwdd = app_tables.homeworkfiles.get(Homework_Title=key)
+          duedate = hwdd['Due_Date']
+          currentdate = datetime.now(timezone.utc)
+          if duedate < currentdate:
+            overduecounter+=1
+          else:
+            notdonecounter+=1
 
     
     currentuserhwdata['Work Overdue'] = overduecounter
