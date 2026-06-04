@@ -15,20 +15,6 @@ class Tutor_Page(Tutor_PageTemplate):
     if anvil.server.call('tutor_perms'):
       self.tutor_redirect.visible = True
     # Any code you write here will run before the form opens.
-
-  
-
-
-    
-
-
-
-
-
-
-
-
-
   
   @handle("delete_button", "click")
   def delete_button_click(self, **event_args):
