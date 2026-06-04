@@ -91,8 +91,26 @@ class Dashboard_Page(Dashboard_PageTemplate):
       shortdate = date.split(" ") #space to omit time, + to include time
       self.Work_Preview.add_component(Label(text="Due: " +shortdate[0], align="center"))
       self.Work_Preview.add_component(Link(url=row["Homework_File"], align="center",text="Download"))
+      self.Work_Preview.add_component(Spacer(height=20))
       dbcount += 1
-    
+  
+  @handle("Homework_Returned_Container", "show")
+  def Homework_Returned_Container_show(self, **event_args):
+    """This method is called when the FlowPanel is shown on the screen"""
+    for row in app_tables.homeworkfiles.search():
+      currentuser = anvil.users.get_user()
+      donecheckrow = app_tables.homework.get(Student=currentuser)
+      donechecklist = donecheckrow['Homework_List']
+      hwtitle = row['Homework_Title']
+      donecheck = donechecklist[hwtitle]
+      if donecheck != 2: continue #if not done do not show
+      self.templbl.visible = False
+      markedrow = app_tables.finishedhomeworkfiles.get(Homework_Title=hwtitle, Uploader=currentuser)
+      self.Homework_Returned_Container.add_component(Label(text= "Homework Task Returned: " + hwtitle, align= "center"))
+      self.Homework_Returned_Container.add_component(Link(url = markedrow["Marked_File"], align="center",text="Download Marked Work"))
+      self.Homework_Returned_Container.add_component(Label(text="Check the homework page to see your total mark.", align="center"))
+      self.Homework_Returned_Container.add_component(Spacer(height=20))
+  
   @handle("Logout_Button", "click")
   def Logout_Button_click(self, **event_args):
     """This method is called when the button is clicked"""
@@ -109,18 +127,9 @@ class Dashboard_Page(Dashboard_PageTemplate):
     """This method is called when the button is clicked"""
     open_form('Homework_Page')
 
-  @handle("Homework_Returned_Container", "show")
-  def Homework_Returned_Container_show(self, **event_args):
-    """This method is called when the FlowPanel is shown on the screen"""
-    for row in app_tables.homeworkfiles.search():
-      currentuser = anvil.users.get_user()
-      donecheckrow = app_tables.homework.get(Student=currentuser)
-      donechecklist = donecheckrow['Homework_List']
-      hwtitle = row['Homework_Title']
-      donecheck = donechecklist[hwtitle]
-      if donecheck != 2: continue #if not done do not show
-      self.templbl.visible = False
-      markedrow = app_tables.finishedhomeworkfiles.get(Homework_Title=hwtitle, Uploader=currentuser)
-      self.Homework_Returned_Container.add_component(Label(text= "Homework Task Returned: " + hwtitle, align= "center"))
-      self.Homework_Returned_Container.add_component(Link(url = markedrow["Marked_File"], align="center",text="Download Marked Work"))
-      self.Homework_Returned_Container.add_component(Label(text="Check the homework page to see your total mark.", align="center"))
+  @handle("worksheet_redirect", "click")
+  def worksheet_redirect_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    open_form('Worksheet_Page')
+
+ 

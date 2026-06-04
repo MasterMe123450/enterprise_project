@@ -17,21 +17,6 @@ class Homework_Page(Homework_PageTemplate):
     
     # Any code you write here will run before the form opens.
 
-  @handle("dashboard_redirect", "click")
-  def dashboard_redirect_click(self, **event_args):
-    """This method is called when the button is clicked"""
-    open_form('Dashboard_Page')
-
-  @handle("tutor_redirect", "click")
-  def tutor_redirect_click(self, **event_args):
-    """This method is called when the button is clicked"""
-    open_form("Tutor_Page")
-
-  @handle("Logout_Button", "click")
-  def Logout_Button_click(self, **event_args):
-    """This method is called when the button is clicked"""
-    anvil.users.logout()
-    open_form('LogIn_Page')
 
   @handle("Homework_Container", "show")
   #NOT DONE
@@ -44,7 +29,7 @@ class Homework_Page(Homework_PageTemplate):
       hwtitle = row['Homework_Title']
       donecheck = donechecklist[hwtitle]
       if donecheck != 0: continue #if done do not show
-        
+      self.tmp_lbl2.visible = False
       xyp = XYPanel(width=250, height=250, border="solid 1px")
       self.Homework_Container.add_component(xyp)
       
@@ -75,7 +60,7 @@ class Homework_Page(Homework_PageTemplate):
       hwtitle = row['Homework_Title']
       donecheck = donechecklist[hwtitle]
       if donecheck != 1: continue #if not done do not show
-
+      self.tmp_lbl3.visible = False
       xyp = XYPanel(width=250, height=250, border="solid 1px")
       self.Homework_Complete_Container.add_component(xyp)
 
@@ -92,11 +77,7 @@ class Homework_Page(Homework_PageTemplate):
       
       dlink = Link(text="Download", align = "left", url=row['Homework_File'])
       xyp.add_component(dlink, x=150, y=202)
-
-
-
-
-
+#button
   def redirect(self, **event_args):
     open_form('Homework_Submit_Page')
 
@@ -110,6 +91,7 @@ class Homework_Page(Homework_PageTemplate):
       hwtitle = row['Homework_Title']
       donecheck = donechecklist[hwtitle]
       if donecheck != 2: continue #if not done do not show
+      self.tmp_lbl1.visible = False
       markedrow = app_tables.finishedhomeworkfiles.get(Homework_Title=hwtitle, Uploader=currentuser)
       xyp = XYPanel(width=250, height=250, border="solid 1px")
       self.Homework_Returned_Container.add_component(xyp)
@@ -123,3 +105,27 @@ class Homework_Page(Homework_PageTemplate):
         
       dlink = Link(text="Download", align = "left", url=markedrow['Marked_File'])
       xyp.add_component(dlink, x=150, y=202)
+
+  
+  #Sidebar navigation
+  @handle("dashboard_redirect", "click")
+  def dashboard_redirect_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    open_form('Dashboard_Page')
+
+  @handle("tutor_redirect", "click")
+  def tutor_redirect_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    open_form("Tutor_Page")
+
+  @handle("Logout_Button", "click")
+  def Logout_Button_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    anvil.users.logout()
+    open_form('LogIn_Page')
+
+
+  @handle("worksheet_redirect", "click")
+  def worksheet_redirect_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    open_form('Worksheet_Page')

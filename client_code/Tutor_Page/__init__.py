@@ -37,13 +37,14 @@ class Tutor_Page(Tutor_PageTemplate):
   def doohickey_button_click(self, **event_args):
     #File Upload
     hwrow = app_tables.homeworkfiles.add_row(Homework_File=self.file_loader_1.file, Homework_Title=self.file_loader_1.file.name)
-    
+    phwrow = app_tables.permanenthomeworkfiles.add_row(Worksheet_File= self.file_loader_1.file)
     #When there is a file in the file upload, and a date in the textbox, it adds/changes a duedate for that file
     duedate = self.DueDateInput.text
     duedateformat = datetime.strptime(duedate, "%d-%m-%Y")
     hwrow["Due_Date"] = duedateformat
     self.upload_feedback.visible = True
     hwrow["Homework_Title"] = self.file_name_input.text 
+    phwrow["Worksheet_Title"] = self.file_name_input.text
     hwrow['Total_Marks'] = int(self.marks_input.text) #make this a number check
     for row in app_tables.homework.search():
       if row["Homework_List"] is None:
@@ -54,6 +55,7 @@ class Tutor_Page(Tutor_PageTemplate):
       #0 for not done,1 for submitted, 2 for returned
       currentlist[newname] = 0
       row['Homework_List'] = currentlist
+    self.mark_input_feedback.visible = True
     self.file_name_input_feedback.visible = True
   
   #Sidebar Navigation
@@ -73,6 +75,11 @@ class Tutor_Page(Tutor_PageTemplate):
     """This method is called when the button is clicked"""
     open_form('Homework_Page')
 
+  @handle("worksheet_redirect", "click")
+  def worksheet_redirect_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    open_form('Worksheet_Page')
+    
   @handle("Marking_Redirect", "click")
   def Marking_Redirect_click(self, **event_args):
     """This method is called when the button is clicked"""

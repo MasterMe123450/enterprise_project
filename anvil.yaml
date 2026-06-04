@@ -84,6 +84,20 @@ db_schema:
     indexes: []
     server: full
     title: HomeworkFiles
+  permanenthomeworkfiles:
+    client: full
+    columns:
+    - admin_ui: {order: 0, width: 200}
+      client_hidden: false
+      name: Worksheet_Title
+      type: string
+    - admin_ui: {order: 1, width: 200}
+      client_hidden: false
+      name: Worksheet_File
+      type: media
+    indexes: []
+    server: full
+    title: PermanentHomeworkFiles
   users:
     client: search
     columns:

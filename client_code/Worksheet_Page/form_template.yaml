@@ -1,57 +1,45 @@
 components:
 - components:
-  - layout_properties: {grid_position: 'NHMQVS,AQZMZA'}
-    name: label_1
-    properties: {align: center, background: 'theme:Primary Container', bold: true, font_size: 50, foreground: 'theme:Primary', text: Homework}
-    type: Label
-  - layout_properties: {grid_position: 'BMMEAB,RHLFYH'}
-    name: label_4
-    properties: {text: Work Returned}
-    type: Label
   - components:
-    - layout_properties: {}
-      name: tmp_lbl1
-      properties: {text: The tutors are working hard to get your work back to you!}
+    - layout_properties: {grid_position: 'DWZFJN,ABBHWA'}
+      name: label_1
+      properties: {align: center, bold: true, font_size: 48, foreground: 'theme:Primary', text: Worksheets}
       type: Label
-    layout_properties: {grid_position: 'HWXWZQ,WXXKJV'}
-    name: Homework_Returned_Container
-    properties:
-      border: 2px solid purple
-      spacing:
-        padding: [null, null, null, '10']
-    type: FlowPanel
-  - layout_properties: {grid_position: 'MJLUMO,NPWLNS'}
-    name: label_2
-    properties: {text: Work to be completed}
+    layout_properties: {grid_position: 'MSIKJO,RDBFMN'}
+    name: column_panel_2
+    properties: {background: 'theme:Primary Container'}
+    type: ColumnPanel
+  - layout_properties: {grid_position: 'SEZGDX,NHTOMZ'}
+    name: tutor_lbl
+    properties: {text: 'Tutors, add more worksheets here. The title will be the name of the file.', visible: false}
     type: Label
-  - components:
-    - layout_properties: {}
-      name: tmp_lbl2
-      properties: {text: No work to be done! Congratulations!}
-      type: Label
-    layout_properties: {grid_position: 'KTRGNK,FQDVTZ'}
-    name: Homework_Container
-    properties:
-      border: 2px solid purple
-      spacing:
-        padding: [null, null, null, '10']
-    type: FlowPanel
-  - layout_properties: {grid_position: 'QCNAHH,IYYRVR'}
+  - layout_properties: {grid_position: 'FDHRDN,TEODEV'}
+    name: worksheet_file_loader
+    properties: {multiple: true, show_state: true, visible: false}
+    type: FileLoader
+  - layout_properties: {grid_position: 'GGTQOF,KOPSYE'}
+    name: tutor_upload
+    properties: {background: 'theme:Primary Container', text: Add to this page}
+    type: Button
+  - layout_properties: {grid_position: 'DCQEBZ,QFRXVZ'}
     name: label_3
-    properties: {text: Completed work}
+    properties: {text: Behold! A wonderful list of our finest worksheets!}
     type: Label
-  - components:
-    - layout_properties: {}
-      name: tmp_lbl3
-      properties: {text: 'No completed work? Someone needs to stop slacking off...'}
-      type: Label
-    layout_properties: {grid_position: 'KWWPTL,RLZQTK'}
-    name: Homework_Complete_Container
+  - layout_properties: {grid_position: 'RQAOGO,BDDCLY'}
+    name: worksheet_container
     properties:
-      border: 2px solid purple
+      border: solid 2px purple
       spacing:
         padding: [null, null, null, '10']
     type: FlowPanel
+  - layout_properties: {grid_position: 'CROECS,YVFTGN'}
+    name: delete_textbox
+    properties: {text: enter a file name and click the button to remove it permanently from the list, visible: false}
+    type: TextArea
+  - layout_properties: {grid_position: 'CIREKJ,BCSABG'}
+    name: delete_button
+    properties: {background: 'theme:Error', foreground: 'theme:On Primary', text: Delete, visible: false}
+    type: Button
   layout_properties: {slot: default}
   name: content_panel
   properties: {}
@@ -61,7 +49,7 @@ components:
   properties: {}
   type: FlowPanel
 - components:
-  - layout_properties: {grid_position: 'MAPSQY,FVBAIR'}
+  - layout_properties: {grid_position: 'ZUNOWU,YKIQZA'}
     name: dashboard_redirect
     properties:
       background: theme:Primary Container
@@ -69,7 +57,7 @@ components:
         margin: [null, null, '35', null]
       text: Dashboard
     type: Button
-  - layout_properties: {grid_position: 'HUKSEL,XUMPCK'}
+  - layout_properties: {grid_position: 'MGURCQ,DOEBMB'}
     name: homework_redirect
     properties:
       background: theme:Primary Container
@@ -77,7 +65,7 @@ components:
         margin: ['35', null, '35', null]
       text: Homework
     type: Button
-  - layout_properties: {grid_position: 'EGGVNF,BHGBJW'}
+  - layout_properties: {grid_position: 'LMCOIS,TMJABT'}
     name: worksheet_redirect
     properties:
       background: theme:Primary Container
@@ -86,7 +74,7 @@ components:
         margin: ['35', null, '35', '0']
       text: Worksheets
     type: Button
-  - layout_properties: {grid_position: 'VMIZZN,YEFJEY'}
+  - layout_properties: {grid_position: 'AZWPEJ,BRQAPF'}
     name: statistics_redirect
     properties:
       background: theme:Primary Container
@@ -94,7 +82,7 @@ components:
         margin: ['35', null, '35', null]
       text: Statistics
     type: Button
-  - layout_properties: {grid_position: 'BNUTIR,PYPMEK'}
+  - layout_properties: {grid_position: 'MIBAIB,KPUVVO'}
     name: tutor_redirect
     properties:
       background: theme:Primary Container
@@ -107,7 +95,7 @@ components:
         TUTOR BUTTON
       visible: false
     type: Button
-  - layout_properties: {grid_position: 'QWSYGI,MTWXWH'}
+  - layout_properties: {grid_position: 'YJQKMG,RIHSSS'}
     name: Logout_Button
     properties:
       background: theme:Primary Container
@@ -121,7 +109,7 @@ components:
   properties: {}
   type: ColumnPanel
 - layout_properties: {slot: title}
-  name: label_5
+  name: label_2
   properties: {text: BEAM Academy}
   type: Label
 container:

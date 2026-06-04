@@ -29,6 +29,18 @@ components:
     name: upload_feedback
     properties: {text: The due date has been set., visible: false}
     type: Label
+  - layout_properties: {grid_position: ''}
+    name: label_5
+    properties: {text: Set Total Marks (as a singular number)}
+    type: Label
+  - layout_properties: {grid_position: ''}
+    name: marks_input
+    properties: {}
+    type: TextBox
+  - layout_properties: {grid_position: 'KYFKUK,YPNBHA'}
+    name: mark_input_feedback
+    properties: {text: The total marks have been set., visible: false}
+    type: Label
   - layout_properties: {grid_position: 'VGKIIE,XKTWQV'}
     name: label_3
     properties: {text: Set Task Name (it will set the name of the file uploaded)}
@@ -41,14 +53,6 @@ components:
     name: file_name_input_feedback
     properties: {text: The work title has been set., visible: false}
     type: Label
-  - layout_properties: {grid_position: 'AZHAKC,SEQBUV'}
-    name: label_5
-    properties: {text: Set Total Marks (as a singular number)}
-    type: Label
-  - layout_properties: {grid_position: 'VTMJWM,GCYBMM'}
-    name: marks_input
-    properties: {}
-    type: TextBox
   - layout_properties: {grid_position: 'AVNMFL,HIEYGK'}
     name: doohickey_button
     properties: {background: 'theme:Primary', foreground: 'theme:On Primary', text: Send to Students}
@@ -129,6 +133,10 @@ components:
   name: column_panel_1
   properties: {}
   type: ColumnPanel
+- layout_properties: {slot: title}
+  name: label_6
+  properties: {text: BEAM Academy}
+  type: Label
 container:
   properties: {html: '@theme:standard-page.html'}
   type: HtmlTemplate

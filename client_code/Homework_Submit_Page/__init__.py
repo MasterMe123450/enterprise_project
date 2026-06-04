@@ -85,6 +85,11 @@ class Homework_Submit_Page(Homework_Submit_PageTemplate):
     """This method is called when the button is clicked"""
     open_form('Tutor_Page')
 
+  @handle("worksheet_redirect", "click")
+  def worksheet_redirect_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    open_form('Worksheet_Page')
+    
   @handle("Logout_Button", "click")
   def Logout_Button_click(self, **event_args):
     """This method is called when the button is clicked"""

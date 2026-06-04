@@ -26,7 +26,8 @@ class Tutor_Marking_Page(Tutor_Marking_PageTemplate):
     #this is genuinely some bullshit i do not fully comprehend, but it works.
     self.tag = {'hwfp':{}, 'cardf':{}, 'cardt':{}, 'cardb':{}}
     for i in uniquehw:
-      title = Label(text= "Worksheet: " + str(i), bold = True, font_size= 24)
+      hwrow = app_tables.homeworkfiles.get(Homework_Title=i)
+      title = Label(text= "Worksheet: " + str(i) +" Marked /" + str(hwrow['Total_Marks']), bold = True, font_size= 24)
       fp = FlowPanel(border= "solid 2px purple")
       self.add_component(title)
       self.tag['hwfp'][i] = fp
@@ -98,6 +99,11 @@ class Tutor_Marking_Page(Tutor_Marking_PageTemplate):
     anvil.users.logout()
     open_form('LogIn_Page')
 
+  @handle("worksheet_redirect", "click")
+  def worksheet_redirect_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    open_form('Worksheet_Page')
+    
   @handle("tutor1_redirect", "click")
   def tutor1_redirect_click(self, **event_args):
     """This method is called when the button is clicked"""
