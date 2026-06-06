@@ -19,7 +19,7 @@ import anvil.server
 @anvil.server.callable
 def tutor_perms():
   tutor = 'ethan.tay1@education.nsw.gov.au'
-  retard = ["ethan.bao1@education.nsw.gov.au","minseok.kim5@edcation.nsw.gov.au","li.yan17@education.nsw.gov.au"]
+  retard = "li.yan17@education.nsw.gov.au"
   if anvil.users.get_user() is None:
     return False
   elif anvil.users.get_user()['email'] == tutor:
