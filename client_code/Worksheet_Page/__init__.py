@@ -33,7 +33,7 @@ class Worksheet_Page(Worksheet_PageTemplate):
       xyp.add_component(titlelbl, x=20, y=10)
 
       dlink = Link(text="Download", align = "left", url=row['Worksheet_File'])
-      xyp.add_component(dlink, x=100, y=202)
+      xyp.add_component(dlink, x=93+8/11, y=202)
   
     #Sidebar Navigation
   @handle("dashboard_redirect", "click")

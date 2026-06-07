@@ -36,6 +36,7 @@ class Tutor_Marking_Page(Tutor_Marking_PageTemplate):
     
     #CREATE instances for each hw submission, for each unique hw
     for row in app_tables.finishedhomeworkfiles.search():
+      self.tmplbl_1.visible = False
       xyp = XYPanel(width=250, height=250, border="solid 1px")
       self.tag['hwfp'][row['Homework_Title']].add_component(xyp)
 
