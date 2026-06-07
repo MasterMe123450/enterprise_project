@@ -19,7 +19,7 @@ class Homework_Page(Homework_PageTemplate):
 
 
   @handle("Homework_Container", "show")
-  #NOT DONE
+  #Show cards of all uncompleted work
   def Homework_Container_show(self, **event_args):
     """This method is called when the FlowPanel is shown on the screen"""
     for row in app_tables.homeworkfiles.search():
@@ -49,7 +49,7 @@ class Homework_Page(Homework_PageTemplate):
       xyp.add_component(dlink, x=150, y=202)
 
 
-  #DONE
+  #Show cards of all completed work
   @handle("Homework_Complete_Container", "show")
   def Homework_Complete_Container_show(self, **event_args):
     """This method is called when the FlowPanel is shown on the screen"""
@@ -77,7 +77,8 @@ class Homework_Page(Homework_PageTemplate):
       
       dlink = Link(text="Download", align = "left", url=row['Homework_File'])
       xyp.add_component(dlink, x=150, y=202)
-#button
+
+  #button
   def redirect(self, **event_args):
     open_form('Homework_Submit_Page')
 

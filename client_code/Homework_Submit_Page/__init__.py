@@ -17,12 +17,6 @@ class Homework_Submit_Page(Homework_Submit_PageTemplate):
       self.tutor_redirect.visible = True
     # Any code you write here will run before the form opens.
 
-    
-    
-
-
-    
-  
 
     
 
@@ -34,7 +28,6 @@ class Homework_Submit_Page(Homework_Submit_PageTemplate):
      worksheetlist.append(row["Homework_Title"])
     self.homework_dropdown.items = worksheetlist
 
-    
 
   @handle("doohickey", "click")
   def doohickey_click(self, **event_args):
@@ -49,12 +42,11 @@ class Homework_Submit_Page(Homework_Submit_PageTemplate):
     date = datetime.now()
     upload_row['Upload Date'] = date
 
-    #TITLE
-    upload_row['Homework_Title'] = self.file_name_input.text
 
-    #SELECTED 
+    #SELECTED HW
     uploadtitle = self.homework_dropdown.selected_value
 
+    
     upload_row['Homework_Title'] = uploadtitle
     cuser = anvil.users.get_user()
     hwlistrow = app_tables.homework.get(Student=cuser)

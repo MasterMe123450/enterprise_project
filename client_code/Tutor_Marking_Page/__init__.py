@@ -11,7 +11,8 @@ class Tutor_Marking_Page(Tutor_Marking_PageTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     super().__init__(**properties)
-
+    if anvil.server.call('tutor_perms'):
+      self.tutor_redirect.visible = True
     # Any code you write here will run before the form opens.
 
 

@@ -11,7 +11,9 @@ class LogIn_Page(LogIn_PageTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     super().__init__(**properties)
+    #prompt login
     anvil.users.login_with_form()
+    #redirect and create new if new
     if anvil.users.get_user() is not None:
       currentuser = anvil.users.get_user()
       currentuserhwdata = app_tables.homework.get(Student=currentuser)
