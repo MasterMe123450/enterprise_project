@@ -44,8 +44,13 @@ class Tutor_Page(Tutor_PageTemplate):
     hwrow["Due_Date"] = duedateformat
     self.upload_feedback.visible = True
     hwrow["Homework_Title"] = self.file_name_input.text 
+    if self.file_name_input.text is not None: self.file_name_input_feedback.visible = True
     phwrow["Worksheet_Title"] = self.file_name_input.text
-    hwrow['Total_Marks'] = int(self.marks_input.text) #make this a number check
+    
+    hwrow['Total_Marks'] = int(self.marks_input.text)
+    if self.mark_input_feedback.text is not None: self.mark_input_feedback.visible = True
+    hwrow['Topic'] = self.Topic_Dropdown.selected_value
+    if self.Topic_Dropdown.selected_value is not None: self.topic_input_feedback.visible = True
     for row in app_tables.homework.search():
       if row["Homework_List"] is None:
         row['Homework_List'] = {}
@@ -55,8 +60,21 @@ class Tutor_Page(Tutor_PageTemplate):
       #0 for not done,1 for submitted, 2 for returned
       currentlist[newname] = 0
       row['Homework_List'] = currentlist
-    self.mark_input_feedback.visible = True
-    self.file_name_input_feedback.visible = True
+    self.send_feedback.visible = True
+    
+
+  @handle("topic_adder", "pressed_enter")
+  def topic_adder_pressed_enter(self, **event_args):
+    """This method is called when the user presses Enter in this text box"""
+    app_tables.topics.add_row(Topic=self.topic_adder.text)
+
+  @handle("Topic_Dropdown", "show")
+  def Topic_Dropdown_show(self, **event_args):
+    """This method is called when the DropDown is shown on the screen"""
+    topics = []
+    for row in app_tables.topics.search():
+      topics.append(row["Topic"])
+    self.Topic_Dropdown.items = topics
   
   #Sidebar Navigation
   @handle("dashboard_redirect", "click")
@@ -89,4 +107,8 @@ class Tutor_Page(Tutor_PageTemplate):
   def statistics_redirect_click(self, **event_args):
     """This method is called when the button is clicked"""
     open_form('Statistics_Page')
+
+  
+
+
 

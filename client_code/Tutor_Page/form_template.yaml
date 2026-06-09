@@ -53,10 +53,30 @@ components:
     name: file_name_input_feedback
     properties: {text: The work title has been set., visible: false}
     type: Label
+  - layout_properties: {grid_position: 'IIOPPX,QVIMUH'}
+    name: label_7
+    properties: {text: Set Work Topic}
+    type: Label
+  - layout_properties: {grid_position: 'KLZTZA,YRTBSJ'}
+    name: Topic_Dropdown
+    properties: {include_placeholder: true}
+    type: DropDown
+  - layout_properties: {grid_position: 'BKWRMK,NENNRD'}
+    name: topic_input_feedback
+    properties: {text: The work topic has been set., visible: false}
+    type: Label
   - layout_properties: {grid_position: 'AVNMFL,HIEYGK'}
     name: doohickey_button
     properties: {background: 'theme:Primary', foreground: 'theme:On Primary', text: Send to Students}
     type: Button
+  - layout_properties: {grid_position: 'PURGPA,MKLVCU'}
+    name: send_feedback
+    properties: {align: center, bold: false, font_size: 18, text: Done! Students will now see the work you have uploaded., visible: false}
+    type: Label
+  - layout_properties: {grid_position: 'SCZVBX,RDMDSY'}
+    name: spacer_1
+    properties: {height: 34.70367431640625}
+    type: Spacer
   - layout_properties: {grid_position: 'SHTXRD,VEBTVW'}
     name: label_4
     properties: {text: Click this button to delete all tasks with the above title for students.}
@@ -65,6 +85,14 @@ components:
     name: delete_button
     properties: {background: 'theme:Error', foreground: 'theme:On Primary', text: Delete this file}
     type: Button
+  - layout_properties: {grid_position: 'JWYMRP,OCTBYL'}
+    name: label_8
+    properties: {text: Add another topic to apply to work}
+    type: Label
+  - layout_properties: {grid_position: 'IPEUAI,ATFZZU'}
+    name: topic_adder
+    properties: {}
+    type: TextBox
   layout_properties: {slot: default}
   name: content_panel
   properties: {}

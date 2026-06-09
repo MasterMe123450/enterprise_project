@@ -20,7 +20,7 @@ components:
         font: ''
         icon_align: left_edge
         spacing:
-          margin: [null, '50', null, '50']
+          margin: [null, '98', null, '70']
           padding: [null, '10', null, '10']
         text: '[x] Work Returned'
       type: Label
@@ -32,7 +32,7 @@ components:
         background: ''
         border: solid 1px
         spacing:
-          margin: [null, '50', null, null]
+          margin: [null, '98', null, null]
           padding: [null, '10', null, '10']
         text: '[X] Work Overdue'
       type: Label
@@ -42,7 +42,7 @@ components:
         border: solid 1px
         icon_align: right
         spacing:
-          margin: [null, '50', null, null]
+          margin: [null, '98', null, null]
           padding: [null, '10', null, '10']
         text: '[X] Work Due Soon'
       type: Label

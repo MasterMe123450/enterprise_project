@@ -16,6 +16,7 @@ class Dashboard_Page(Dashboard_PageTemplate):
       self.tutor_redirect.visible = True
 
     #Top dashboard summary info
+    #MOVE IT TO CONTAINER_SHOW TO LOAD WHILE THE USER IS ALREADY ON THE PAGE?
     #get the user hwtables
     currentuser = anvil.users.get_user()
     currentuserhwdata = app_tables.homework.get(Student=currentuser)
@@ -83,6 +84,7 @@ class Dashboard_Page(Dashboard_PageTemplate):
       donecheckrow = app_tables.homework.get(Student=currentuser)
       donechecklist = donecheckrow['Homework_List']
       hwtitle = row['Homework_Title']
+      if donechecklist is None: continue
       donecheck = donechecklist[hwtitle]
       if donecheck != 0: continue #if done do not show
       self.templbl2.visible = False
@@ -93,7 +95,23 @@ class Dashboard_Page(Dashboard_PageTemplate):
       self.Work_Preview.add_component(Link(url=row["Homework_File"], align="center",text="Download"))
       self.Work_Preview.add_component(Spacer(height=20))
       dbcount += 1
-  
+    
+    #cheeky lil average update
+    marklist = 0
+    totalwork = 0
+    for row in app_tables.finishedhomeworkfiles.search():
+      if row['Uploader'] != currentuser: continue
+      if row['Marks'] is None: continue
+      markgiven = int(row['Marks'])
+      tmarkrow = app_tables.homeworkfiles.get(Homework_Title=row['Homework_Title'])
+      totalmarks = int(tmarkrow["Total_Marks"])
+      percentage = round(markgiven/totalmarks, 1) * 100
+      marklist += percentage
+      totalwork+=1
+    if totalwork != 0: marklist/=totalwork
+    currentuserhwdata['Average Mark'] = marklist
+
+    
   @handle("Homework_Returned_Container", "show")
   def Homework_Returned_Container_show(self, **event_args):
     """This method is called when the FlowPanel is shown on the screen"""
@@ -102,6 +120,7 @@ class Dashboard_Page(Dashboard_PageTemplate):
       donecheckrow = app_tables.homework.get(Student=currentuser)
       donechecklist = donecheckrow['Homework_List']
       hwtitle = row['Homework_Title']
+      if donechecklist is None: continue
       donecheck = donechecklist[hwtitle]
       if donecheck != 2: continue #if not done do not show
       self.templbl.visible = False

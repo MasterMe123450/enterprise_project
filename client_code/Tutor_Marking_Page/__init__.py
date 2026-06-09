@@ -22,6 +22,7 @@ class Tutor_Marking_Page(Tutor_Marking_PageTemplate):
     hwlist = []
     #CREATE boxes for unique titles 
     for row in app_tables.finishedhomeworkfiles.search():
+      if row['Marks'] is not None: continue
       hwlist.append(row['Homework_Title'])
     uniquehw = list(dict.fromkeys(hwlist))
     #this is genuinely some bullshit i do not fully comprehend, but it works.
@@ -36,6 +37,7 @@ class Tutor_Marking_Page(Tutor_Marking_PageTemplate):
     
     #CREATE instances for each hw submission, for each unique hw
     for row in app_tables.finishedhomeworkfiles.search():
+      if row['Marks'] is not None: continue
       self.tmplbl_1.visible = False
       xyp = XYPanel(width=250, height=250, border="solid 1px")
       self.tag['hwfp'][row['Homework_Title']].add_component(xyp)
