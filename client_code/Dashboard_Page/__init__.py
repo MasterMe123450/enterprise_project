@@ -132,4 +132,9 @@ class Dashboard_Page(Dashboard_PageTemplate):
     """This method is called when the button is clicked"""
     open_form('Worksheet_Page')
 
+  @handle("statistics_redirect", "click")
+  def statistics_redirect_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    open_form('Statistics_Page')
+
  

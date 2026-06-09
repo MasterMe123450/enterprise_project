@@ -110,3 +110,8 @@ class Tutor_Marking_Page(Tutor_Marking_PageTemplate):
   def tutor1_redirect_click(self, **event_args):
     """This method is called when the button is clicked"""
     open_form('Tutor_Page')
+
+  @handle("statistics_redirect", "click")
+  def statistics_redirect_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    open_form('Statistics_Page')

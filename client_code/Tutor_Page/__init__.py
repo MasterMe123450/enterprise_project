@@ -85,5 +85,8 @@ class Tutor_Page(Tutor_PageTemplate):
     """This method is called when the button is clicked"""
     open_form('Tutor_Marking_Page')
 
-
+  @handle("statistics_redirect", "click")
+  def statistics_redirect_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    open_form('Statistics_Page')
 

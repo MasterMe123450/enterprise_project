@@ -88,6 +88,9 @@ class Homework_Submit_Page(Homework_Submit_PageTemplate):
     anvil.users.logout()
     open_form('LogIn_Page')
 
+  @handle("statistics_redirect", "click")
+  def statistics_redirect_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    open_form('Statistics_Page')    
     
-    
-    
+
