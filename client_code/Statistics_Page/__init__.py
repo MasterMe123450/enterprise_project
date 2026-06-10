@@ -125,7 +125,7 @@ class Statistics_Page(Statistics_PageTemplate):
                 topicmark = usermarkdict[key]
                 topictotal += topicmark/totalmark
                 totaltasks += 1
-            if topicbreakdown[key] == None:
+            if key not in topicbreakdown:
               print(key + " is not a subject in the dictionary!")
 
         #Single topic worksheet
