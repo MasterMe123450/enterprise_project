@@ -103,7 +103,10 @@ class Statistics_Page(Statistics_PageTemplate):
     for key in hwlist.keys():
       topic = app_tables.homeworkfiles.get(Homework_Title=key)
       topiclist.append(topic['Topic'])
-      
+      if topic['Topic'] == "mixed":
+        mixedtopiclist = topic["Topics_Marks"]
+        for key in mixedtopiclist.keys():
+          topiclist.append(key)
     topics = list(dict.fromkeys(topiclist))
     print(topics)
     topicbreakdown = {}
@@ -124,9 +127,8 @@ class Statistics_Page(Statistics_PageTemplate):
                 usermarkdict = userhwrow['Topics_Marks']
                 topicmark = usermarkdict[key]
                 topictotal += topicmark/totalmark
+                print(topicmark/totalmark)
                 totaltasks += 1
-            if key not in topicbreakdown:
-              print(key + " is not a subject in the dictionary!")
 
         #Single topic worksheet
         if row['Topic'] == topic:
@@ -138,6 +140,7 @@ class Statistics_Page(Statistics_PageTemplate):
               totalmarkrow = app_tables.homeworkfiles.get(Homework_Title=hwrow["Homework_Title"])
               totalmark = totalmarkrow["Total_Marks"]
               topictotal += topicmark/totalmark
+              print(topicmark/totalmark)
               totaltasks += 1
       if totaltasks != 0:
         topicaverage = topictotal/totaltasks*100
@@ -145,6 +148,7 @@ class Statistics_Page(Statistics_PageTemplate):
           topicbreakdown[topic] = str(topicaverage) + "%"
         else:
           topicbreakdown["No Topic"] = str(topicaverage) + "%"
+    #anything from a "mixed" worksheet that wasn't originally a topic on the topic list is literally just lying just letting you know!
     print(topicbreakdown)
 
 
