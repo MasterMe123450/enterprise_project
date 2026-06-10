@@ -6,7 +6,7 @@ import anvil.users
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
-
+currentuser = anvil.users.get_user()
 
 class Homework_Submit_Page(Homework_Submit_PageTemplate):
   def __init__(self, **properties):
@@ -24,8 +24,12 @@ class Homework_Submit_Page(Homework_Submit_PageTemplate):
   def homework_dropdown_show(self, **event_args):
     """This method is called when the DropDown is shown on the screen"""
     worksheetlist = [""]
-    for row in app_tables.homeworkfiles.search():
-     worksheetlist.append(row["Homework_Title"])
+    hwlistrw = app_tables.homework.get(Student=currentuser)
+    hwdict = hwlistrw['Homework_List']
+    hwlist = hwdict.keys
+    for key in hwlist():
+     if hwdict[key] == 0:
+       worksheetlist.append(key)
     self.homework_dropdown.items = worksheetlist
 
 
