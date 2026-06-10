@@ -61,6 +61,39 @@ components:
     name: Topic_Dropdown
     properties: {include_placeholder: true}
     type: DropDown
+  - layout_properties: {grid_position: 'GKGLOJ,GEHLLA'}
+    name: topic1lbl1_1
+    properties: {text: Select the first topic, visible: false}
+    type: Label
+  - layout_properties: {grid_position: 'HLRRUY,TLFFCH'}
+    name: topic_dropdown_1
+    properties: {visible: false}
+    type: DropDown
+  - layout_properties: {grid_position: 'YFFACS,PABKQU'}
+    name: topiclbl1_2
+    properties: {text: Enter the amount of marks of this topic, visible: false}
+    type: Label
+  - layout_properties: {grid_position: 'YLINHI,ZGFSXC'}
+    name: topic1_markinput
+    properties: {type: number, visible: false}
+    type: TextBox
+  - data_bindings: []
+    layout_properties: {grid_position: 'UEMAAC,DPRUAJ'}
+    name: topiclbl2_1
+    properties: {text: Select the second topic, visible: false}
+    type: Label
+  - layout_properties: {grid_position: 'WMXDBQ,YNBCUZ'}
+    name: topic_dropdown_2
+    properties: {visible: false}
+    type: DropDown
+  - layout_properties: {grid_position: 'MNDKDO,ZEAWEV'}
+    name: topiclbl2_2
+    properties: {text: Enter the amount of marks of this topic, visible: false}
+    type: Label
+  - layout_properties: {grid_position: 'TWWIIR,WOQGWV'}
+    name: topic2_markinput
+    properties: {type: number, visible: false}
+    type: TextBox
   - layout_properties: {grid_position: 'BKWRMK,NENNRD'}
     name: topic_input_feedback
     properties: {text: The work topic has been set., visible: false}

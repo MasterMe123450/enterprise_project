@@ -50,6 +50,15 @@ class Tutor_Page(Tutor_PageTemplate):
     hwrow['Total_Marks'] = int(self.marks_input.text)
     if self.mark_input_feedback.text is not None: self.mark_input_feedback.visible = True
     hwrow['Topic'] = self.Topic_Dropdown.selected_value
+    if self.Topic_Dropdown.selected_value == "mixed":
+      topicbreakdown = {}
+      topic1 = self.topic_dropdown_1.selected_value
+      topic1marks = self.topic1_markinput.text
+      topic2 = self.topic_dropdown_2.selected_value
+      topic2marks = self.topic2_markinput.text
+      topicbreakdown[topic1] = topic1marks
+      topicbreakdown[topic2] = topic2marks
+      hwrow['Topics_Marks'] = topicbreakdown
     if self.Topic_Dropdown.selected_value is not None: self.topic_input_feedback.visible = True
     for row in app_tables.homework.search():
       if row["Homework_List"] is None:
@@ -75,7 +84,48 @@ class Tutor_Page(Tutor_PageTemplate):
     for row in app_tables.topics.search():
       topics.append(row["Topic"])
     self.Topic_Dropdown.items = topics
-  
+
+  @handle("Topic_Dropdown", "change")
+  def Topic_Dropdown_change(self, **event_args):
+    """This method is called when an item is selected"""
+    if self.Topic_Dropdown.selected_value == "mixed":
+      self.topic_dropdown_1.visible = True
+      self.topic1lbl1_1.visible = True
+      self.topiclbl1_2.visible = True
+      self.topic1_markinput.visible = True
+      self.topic_dropdown_2.visible = True
+      self.topiclbl2_1.visible = True
+      self.topiclbl2_2.visible = True
+      self.topic2_markinput.visible = True
+    else:
+      self.topic_dropdown_1.visible = False
+      self.topic1lbl1_1.visible = False
+      self.topiclbl1_2.visible = False
+      self.topic1_markinput.visible = False
+      self.topic_dropdown_2.visible = False
+      self.topiclbl2_1.visible = False
+      self.topiclbl2_2.visible = False
+      self.topic2_markinput.visible = False
+
+  @handle("topic_dropdown_1", "show")
+  def topic_dropdown_1_show(self, **event_args):
+    """This method is called when the DropDown is shown on the screen"""
+    topics = []
+    for row in app_tables.topics.search():
+      topics.append(row["Topic"])
+    topics.remove("mixed")
+    self.topic_dropdown_1.items = topics
+
+  @handle("topic_dropdown_1", "show")
+  def topic_dropdown_2_show(self, **event_args):
+    """This method is called when the DropDown is shown on the screen"""
+    topics = []
+    for row in app_tables.topics.search():
+      topics.append(row["Topic"])
+    topics.remove("mixed")
+    self.topic_dropdown_2.items = topics
+
+
   #Sidebar Navigation
   @handle("dashboard_redirect", "click")
   def dashboard_redirect_click(self, **event_args):
@@ -107,6 +157,9 @@ class Tutor_Page(Tutor_PageTemplate):
   def statistics_redirect_click(self, **event_args):
     """This method is called when the button is clicked"""
     open_form('Statistics_Page')
+
+
+
 
   
 

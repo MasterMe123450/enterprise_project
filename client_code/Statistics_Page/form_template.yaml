@@ -69,10 +69,22 @@ components:
     name: label_2
     properties: {text: Average score of your past worksheets}
     type: Label
+  - layout_properties: {grid_position: 'QBUXZO,ETRRKU'}
+    name: Show_Average_Plot
+    properties: {background: 'theme:Primary Container', text: Toggle Graph}
+    type: Button
   - layout_properties: {grid_position: 'HIEIXV,LBQHNH'}
     name: score_plot
-    properties: {}
+    properties: {visible: false}
     type: Plot
+  - layout_properties: {grid_position: 'YJAROM,HOEOUZ'}
+    name: label_3
+    properties: {text: 'Topic-By-Topic score breakdown:'}
+    type: Label
+  - layout_properties: {grid_position: 'KBZJGT,KXJVWX'}
+    name: Show_TBT_plot
+    properties: {background: 'theme:Primary Container', text: Toggle Graph}
+    type: Button
   layout_properties: {slot: default}
   name: content_panel
   properties: {}

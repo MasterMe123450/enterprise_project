@@ -41,6 +41,8 @@ class Statistics_Page(Statistics_PageTemplate):
         )
       ]
 
+
+  
   @handle("flow_panel_1", "show")
   def flow_panel_1_show(self, **event_args):
     """This method is called when the FlowPanel is shown on the screen"""
@@ -76,13 +78,23 @@ class Statistics_Page(Statistics_PageTemplate):
     else: completionrate = 0
     self.Homework_Completion_Rate_KPI.text = "Homework Completion Rate: " + str(round(completionrate,2)) + "%"
 
-    #Rank
+    #Rank, system literally checks if anyone has a higher average 
     rank = 1
     for row in app_tables.homework.search():
       if row['Average Mark'] > currentuserhwdata['Average Mark']: rank +=1
     self.Class_Rank_KPI.text = "Class Rank: " + str(rank)
 
+  #Show average plot when clicked
+  @handle("Show_Average_Plot", "click")
+  def Show_Average_Plot_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    if self.score_plot.visible:
+      self.score_plot.visible = False
+    else:
+      self.score_plot.visible = True
     
+
+
   @handle("Logout_Button", "click")
   def Logout_Button_click(self, **event_args):
     """This method is called when the button is clicked"""
@@ -108,3 +120,11 @@ class Statistics_Page(Statistics_PageTemplate):
   def statistics_redirect_click(self, **event_args):
     """This method is called when the button is clicked"""
     open_form('Statistics_Page')
+
+  @handle("Show_TBT_plot", "click")
+  def Show_TBT_plot_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    topics = {}
+    
+
+
