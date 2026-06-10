@@ -97,6 +97,7 @@ class Tutor_Marking_Page(Tutor_Marking_PageTemplate):
           
   def sendmarkedwork(self, **event_args):
     for row in app_tables.finishedhomeworkfiles.search():
+      topicmarklist = None
       if row in self.tag['cardt']:
        markupload = self.tag['cardt'][row] 
       else: markupload = None

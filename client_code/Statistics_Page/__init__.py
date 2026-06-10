@@ -92,7 +92,60 @@ class Statistics_Page(Statistics_PageTemplate):
       self.score_plot.visible = False
     else:
       self.score_plot.visible = True
+
     
+  @handle("Show_TBT_plot", "click")
+  def Show_TBT_plot_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    userhwrow = app_tables.homework.get(Student=currentuser)
+    hwlist = userhwrow['Homework_List']
+    topiclist = []
+    for key in hwlist.keys():
+      topic = app_tables.homeworkfiles.get(Homework_Title=key)
+      topiclist.append(topic['Topic'])
+      
+    topics = list(dict.fromkeys(topiclist))
+    print(topics)
+    topicbreakdown = {}
+    for topic in topics:
+      if topic == "mixed": continue
+      topictotal = 0
+      totaltasks = 0
+      for row in app_tables.homeworkfiles.search():
+        #Mixed worksheet
+        if row['Topic'] == "mixed":
+          mixeddict = row["Topics_Marks"]
+          print(row['Homework_Title'])
+          for key in mixeddict.keys():
+            if key == topic:
+              userhwrow = app_tables.finishedhomeworkfiles.get(Homework_Title=row['Homework_Title'], Uploader=currentuser)
+              if userhwrow is not None:
+                totalmark = mixeddict[key]
+                usermarkdict = userhwrow['Topics_Marks']
+                topicmark = usermarkdict[key]
+                topictotal += topicmark/totalmark
+                totaltasks += 1
+            if topicbreakdown[key] == None:
+              print(key + " is not a subject in the dictionary!")
+
+        #Single topic worksheet
+        if row['Topic'] == topic:
+          print(row['Homework_Title'])
+          hwrow = app_tables.finishedhomeworkfiles.get(Homework_Title=row['Homework_Title'], Uploader=currentuser)
+          if hwrow is not None:
+            if hwrow['Marks'] is not None:
+              topicmark = hwrow['Marks']
+              totalmarkrow = app_tables.homeworkfiles.get(Homework_Title=hwrow["Homework_Title"])
+              totalmark = totalmarkrow["Total_Marks"]
+              topictotal += topicmark/totalmark
+              totaltasks += 1
+      if totaltasks != 0:
+        topicaverage = topictotal/totaltasks*100
+        if topic is not None:
+          topicbreakdown[topic] = str(topicaverage) + "%"
+        else:
+          topicbreakdown["No Topic"] = str(topicaverage) + "%"
+    print(topicbreakdown)
 
 
   @handle("Logout_Button", "click")
@@ -121,10 +174,6 @@ class Statistics_Page(Statistics_PageTemplate):
     """This method is called when the button is clicked"""
     open_form('Statistics_Page')
 
-  @handle("Show_TBT_plot", "click")
-  def Show_TBT_plot_click(self, **event_args):
-    """This method is called when the button is clicked"""
-    topics = {}
-    
+
 
 

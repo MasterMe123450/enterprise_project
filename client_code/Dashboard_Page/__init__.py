@@ -115,6 +115,8 @@ class Dashboard_Page(Dashboard_PageTemplate):
   @handle("Homework_Returned_Container", "show")
   def Homework_Returned_Container_show(self, **event_args):
     """This method is called when the FlowPanel is shown on the screen"""
+    dbcap = 3
+    dbcount = 1
     for row in app_tables.homeworkfiles.search():
       currentuser = anvil.users.get_user()
       donecheckrow = app_tables.homework.get(Student=currentuser)
@@ -123,12 +125,14 @@ class Dashboard_Page(Dashboard_PageTemplate):
       if donechecklist is None: continue
       donecheck = donechecklist[hwtitle]
       if donecheck != 2: continue #if not done do not show
+      if dbcount > dbcap: return #if over 3 items do not show
       self.templbl.visible = False
       markedrow = app_tables.finishedhomeworkfiles.get(Homework_Title=hwtitle, Uploader=currentuser)
       self.Homework_Returned_Container.add_component(Label(text= "Homework Task Returned: " + hwtitle, align= "center"))
       self.Homework_Returned_Container.add_component(Link(url = markedrow["Marked_File"], align="center",text="Download Marked Work"))
       self.Homework_Returned_Container.add_component(Label(text="Check the homework page to see your total mark.", align="center"))
       self.Homework_Returned_Container.add_component(Spacer(height=20))
+      dbcount += 1
   
   @handle("Logout_Button", "click")
   def Logout_Button_click(self, **event_args):
