@@ -21,6 +21,63 @@ components:
     properties: {background: 'theme:Primary Container', text: Load Statistics}
     type: Button
   - components:
+    - data_bindings:
+      - {code: 'self.item['''']', property: text, writeback: false}
+      layout_properties: {expand: false, width: 10}
+      name: n_KPI
+      properties:
+        background: ''
+        border: solid 1px
+        font: ''
+        icon_align: left_edge
+        spacing:
+          margin: [null, '50', null, '50']
+          padding: [null, '10', null, '10']
+        text: 'Number of students: '
+      type: Label
+    - data_bindings:
+      - {code: 'self.item['''']', property: text, writeback: false}
+      layout_properties: {expand: false}
+      name: Average_Mark_KPI
+      properties:
+        background: ''
+        border: solid 1px
+        spacing:
+          margin: [null, '50', null, null]
+          padding: [null, '10', null, '10']
+        text: 'Average Mark: '
+      type: Label
+    - layout_properties: {}
+      name: Median_KPI
+      properties:
+        border: solid 1px
+        icon_align: right
+        spacing:
+          margin: [null, '50', null, null]
+          padding: [null, '10', null, '10']
+        text: 'Median Mark:'
+      type: Label
+    - layout_properties: {}
+      name: Mode_KPI
+      properties:
+        border: solid 1px
+        icon_align: right_edge
+        spacing:
+          margin: [null, '50', null, null]
+          padding: [null, '10', null, '10']
+        text: 'Mode:'
+      type: Label
+    data_bindings: []
+    layout_properties: {grid_position: 'UASCPW,OILFFR'}
+    name: flow_panel_1
+    properties:
+      background: ''
+      border: solid 2px purple
+      spacing:
+        padding: ['10', null, '10', null]
+      visible: false
+    type: FlowPanel
+  - components:
     - name: repeating_panel_1
       properties: {item_template: Specific_Statistics_Page.RowTemplate1}
       type: RepeatingPanel
@@ -31,7 +88,12 @@ components:
       columns:
       - {data_key: Uploader, id: JKSDUP, title: Name}
       - {data_key: Marks, id: VJQQOR, title: Mark}
+      visible: false
     type: DataGrid
+  - layout_properties: {grid_position: 'GUIDOV,HLCZEQ'}
+    name: Distribution_Plot
+    properties: {visible: false}
+    type: Plot
   layout_properties: {slot: default}
   name: content_panel
   properties: {}
