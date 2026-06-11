@@ -129,10 +129,10 @@ class Statistics_Page(Statistics_PageTemplate):
           mixeddict = row["Topics_Marks"]
           for key in mixeddict.keys():
             if key == topic:
-              userhwrow = app_tables.finishedhomeworkfiles.get(Homework_Title=row['Homework_Title'], Uploader=currentuser)
-              if userhwrow is not None:
+              userhwrow2 = app_tables.finishedhomeworkfiles.get(Homework_Title=row['Homework_Title'], Uploader=currentuser)
+              if userhwrow2 is not None:
                 totalmark = mixeddict[key]
-                usermarkdict = userhwrow['Topics_Marks']
+                usermarkdict = userhwrow2['Topics_Marks']
                 topicmark = usermarkdict[key]
                 topictotal += topicmark/totalmark
                 totaltasks += 1
@@ -169,6 +169,8 @@ class Statistics_Page(Statistics_PageTemplate):
       xdata.append(key)
     for value in topicbreakdown.values():
       ydata.append(value)
+    xdata.append("All topics")
+    ydata.append(userhwrow['Average Mark'])
     print(xdata)
     print(ydata)
     if xdata is not None and ydata is not None:

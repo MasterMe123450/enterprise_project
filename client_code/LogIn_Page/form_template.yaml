@@ -1,13 +1,17 @@
 components:
-- components: []
-  layout_properties: {slot: default}
-  name: content_panel
-  properties: {}
-  type: ColumnPanel
 - layout_properties: {slot: nav-right}
   name: navbar_links
   properties: {}
   type: FlowPanel
+- components: []
+  layout_properties: {slot: title}
+  name: content_panel
+  properties: {}
+  type: ColumnPanel
+- layout_properties: {slot: default}
+  name: label_1
+  properties: {text: Placeholder text}
+  type: Label
 container:
   properties: {html: '@theme:standard-page.html'}
   type: HtmlTemplate
