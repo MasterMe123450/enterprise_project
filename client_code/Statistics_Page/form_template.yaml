@@ -85,6 +85,10 @@ components:
     name: Show_TBT_plot
     properties: {background: 'theme:Primary Container', text: Toggle Graph}
     type: Button
+  - layout_properties: {grid_position: 'RHVAWK,CHYZBR'}
+    name: TBT_Plot
+    properties: {visible: false}
+    type: Plot
   layout_properties: {slot: default}
   name: content_panel
   properties: {}

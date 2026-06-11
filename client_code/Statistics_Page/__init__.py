@@ -92,11 +92,12 @@ class Statistics_Page(Statistics_PageTemplate):
       self.score_plot.visible = False
     else:
       self.score_plot.visible = True
-
-    
+  
+  #somehow create a topic by topic graph
   @handle("Show_TBT_plot", "click")
   def Show_TBT_plot_click(self, **event_args):
     """This method is called when the button is clicked"""
+    #Create topic by topic data
     userhwrow = app_tables.homework.get(Student=currentuser)
     hwlist = userhwrow['Homework_List']
     topiclist = []
@@ -151,6 +152,29 @@ class Statistics_Page(Statistics_PageTemplate):
     #anything from a "mixed" worksheet that wasn't originally a topic on the topic list is literally just lying just letting you know!
     print(topicbreakdown)
 
+    #Toggle the graph
+    if self.TBT_Plot.visible:
+      self.TBT_Plot.visible = False
+    else:
+      self.TBT_Plot.visible = True
+      
+    #create graph 
+    xdata = []
+    ydata = []
+    for key in topicbreakdown.keys():
+      xdata.append(key)
+    for value in topicbreakdown.values():
+      ydata.append(value)
+    print(xdata)
+    print(ydata)
+    if xdata is not None and ydata is not None:
+      self.TBT_plot.data = [
+        go.scatter(
+          x = xdata,
+          y = ydata,
+          marker = dict(color= 'rgb(155, 155, 0)')
+        )
+      ]
 
   @handle("Logout_Button", "click")
   def Logout_Button_click(self, **event_args):
@@ -177,6 +201,8 @@ class Statistics_Page(Statistics_PageTemplate):
   def statistics_redirect_click(self, **event_args):
     """This method is called when the button is clicked"""
     open_form('Statistics_Page')
+
+
 
 
 
