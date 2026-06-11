@@ -31,6 +31,9 @@ class Specific_Statistics_Page(Specific_Statistics_PageTemplate):
     #The marklist(tm)
     for row in app_tables.finishedhomeworkfiles.search():
       if row['Homework_Title'] == self.Selection_Dropdown.selected_value:
+        userrow = row['Uploader']
+        user = userrow['email']
+        if anvil.server.call('remove_tutors', user): continue
         contentdict = {}
         user = row['Uploader']
         contentdict["Uploader"] = user['Name']
@@ -43,29 +46,39 @@ class Specific_Statistics_Page(Specific_Statistics_PageTemplate):
     #The KPIs
     marklist.sort()
     averagemark = 0
-    for i in marklist:
-      averagemark += i
-    averagemark/=len(marklist)
-    if len(marklist) % 2 == 0:
-      index = len(marklist)/2
-      medianmark = marklist[int(index)]
-    elif len(marklist) != 1:
-      index = len(marklist)/2 + 0.5
-      medianmark = marklist[int(index)]
-      index = len(marklist)/2 - 0.5
-      medianmark += marklist[int(index)]
-      medianmark /= 2
+    if len(marklist) == 0:
+      print("This task does not exist!")
     else:
-      medianmark = marklist[0]
-    self.n_KPI.text = "Number of Students: " + str(len(marklist))
-    self.Average_Mark_KPI.text = "Average Mark: " + str(round(averagemark,2))
-    self.Median_KPI.text = "Median Mark: " + str(medianmark)
-    self.Mode_KPI.text= "Mode: " + str(max(set(marklist), key = marklist.count))
-
-    #The distribution plot
-    self.Distribution_Plot.data = [
-      go.Box(x = marklist)
-    ]
+      for i in marklist:
+        averagemark += i
+      averagemark/=len(marklist)
+      if len(marklist) % 2 == 0:
+        index = len(marklist)/2 
+        medianmark = marklist[int(index)]
+        index = len(marklist)/2 - 1 
+        medianmark += marklist[int(index)]
+        medianmark /= 2
+      elif len(marklist) != 1:
+        index = len(marklist)/2 - 0.5
+        medianmark = marklist[int(index)]
+      else:
+        medianmark = marklist[0]
+      self.n_KPI.text = "Number of Students: " + str(len(marklist))
+      self.Average_Mark_KPI.text = "Average Mark: " + str(round(averagemark,2))
+      self.Median_KPI.text = "Median Mark: " + str(medianmark)
+      modecheck = 0
+      for mark in marklist:
+        if mark == max(set(marklist), key = marklist.count):
+          modecheck +=1
+      if modecheck > 1:
+        self.Mode_KPI.text= "Mode: " + str(max(set(marklist), key = marklist.count))
+      else:
+        self.Mode_KPI.text= "Mode: No Mode" 
+  
+      #The distribution plot
+      self.Distribution_Plot.data = [
+        go.Box(x = marklist)
+      ]
     
   @handle("Selection_Dropdown", "show")
   def Selection_Dropdown_show(self, **event_args):

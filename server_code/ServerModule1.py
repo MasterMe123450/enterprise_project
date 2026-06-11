@@ -15,11 +15,10 @@ import anvil.server
 # def say_hello(name):
 #   print("Hello, " + name + "!")
 #   return 42
-
+tutor = ['ethan.tay1@education.nsw.gov.au']
+retard = "li.yan17@education.nsw.gov.au"
 @anvil.server.callable
 def tutor_perms():
-  tutor = ['ethan.tay1@education.nsw.gov.au']
-  retard = "li.yan17@education.nsw.gov.au"
   if anvil.users.get_user() is None:
     return False
   elif anvil.users.get_user()['email'] in tutor:
@@ -29,5 +28,12 @@ def tutor_perms():
     print("retards are not allowed at beam!")
     lisrow.delete()
     return False
+  else:
+    return False
+
+@anvil.server.callable
+def remove_tutors(user):
+  if user in tutor:
+    return True
   else:
     return False
