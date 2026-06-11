@@ -37,9 +37,18 @@ class Statistics_Page(Statistics_PageTemplate):
         go.Scatter(
           x = xdata,
           y = ydata,
-          marker = dict(color= 'rgb(155, 155, 0)')
+          marker = dict(color= 'rgb(139, 116, 204)')
         )
       ]
+      self.score_plot.layout = {
+        'xaxis': {
+          'title': {'text': 'Task'},
+        },
+        'yaxis': {
+          'title': {'text': 'Average Mark as %'},
+          'range': (0,100)
+        }
+      }
 
 
   
@@ -109,7 +118,6 @@ class Statistics_Page(Statistics_PageTemplate):
         for key in mixedtopiclist.keys():
           topiclist.append(key)
     topics = list(dict.fromkeys(topiclist))
-    print(topics)
     topicbreakdown = {}
     for topic in topics:
       if topic == "mixed": continue
@@ -119,7 +127,6 @@ class Statistics_Page(Statistics_PageTemplate):
         #Mixed worksheet
         if row['Topic'] == "mixed":
           mixeddict = row["Topics_Marks"]
-          print(row['Homework_Title'])
           for key in mixeddict.keys():
             if key == topic:
               userhwrow = app_tables.finishedhomeworkfiles.get(Homework_Title=row['Homework_Title'], Uploader=currentuser)
@@ -128,12 +135,10 @@ class Statistics_Page(Statistics_PageTemplate):
                 usermarkdict = userhwrow['Topics_Marks']
                 topicmark = usermarkdict[key]
                 topictotal += topicmark/totalmark
-                print(topicmark/totalmark)
                 totaltasks += 1
 
         #Single topic worksheet
         if row['Topic'] == topic:
-          print(row['Homework_Title'])
           hwrow = app_tables.finishedhomeworkfiles.get(Homework_Title=row['Homework_Title'], Uploader=currentuser)
           if hwrow is not None:
             if hwrow['Marks'] is not None:
@@ -150,7 +155,6 @@ class Statistics_Page(Statistics_PageTemplate):
         else:
           topicbreakdown["No Topic"] = str(topicaverage) + "%"
     #anything from a "mixed" worksheet that wasn't originally a topic on the topic list is literally just lying just letting you know!
-    print(topicbreakdown)
 
     #Toggle the graph
     if self.TBT_Plot.visible:
@@ -168,13 +172,24 @@ class Statistics_Page(Statistics_PageTemplate):
     print(xdata)
     print(ydata)
     if xdata is not None and ydata is not None:
-      self.TBT_plot.data = [
-        go.scatter(
+      self.TBT_Plot.data = [ 
+        go.Bar(
           x = xdata,
           y = ydata,
-          marker = dict(color= 'rgb(155, 155, 0)')
+          marker = dict(color= 'rgb(139, 116, 204)')
         )
       ]
+      self.TBT_Plot.layout = {
+        'xaxis': {
+          'title': {'text': 'Topic'},
+          
+        },
+        'yaxis': {
+          'title': {'text': 'Average Mark as %'},
+          'range': (0,100)
+        }
+      }
+
 
   @handle("Logout_Button", "click")
   def Logout_Button_click(self, **event_args):
