@@ -65,6 +65,10 @@ components:
       spacing:
         padding: ['10', null, '10', null]
     type: FlowPanel
+  - layout_properties: {grid_position: 'SOQFUF,FDSQFV'}
+    name: IndividualStat_Redirect
+    properties: {background: 'theme:Primary Container', text: Click here to see statistics on individual tests/worksheets!}
+    type: Button
   - layout_properties: {grid_position: 'SGPEDZ,BXAXBK'}
     name: label_2
     properties: {text: Average score of your past worksheets}
@@ -89,6 +93,10 @@ components:
     name: TBT_Plot
     properties: {visible: false}
     type: Plot
+  - layout_properties: {grid_position: 'QJMZFT,DHXGMI'}
+    name: spacer_1
+    properties: {height: 67.962890625}
+    type: Spacer
   layout_properties: {slot: default}
   name: content_panel
   properties: {}

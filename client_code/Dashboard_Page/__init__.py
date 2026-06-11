@@ -85,7 +85,9 @@ class Dashboard_Page(Dashboard_PageTemplate):
       donechecklist = donecheckrow['Homework_List']
       hwtitle = row['Homework_Title']
       if donechecklist is None: continue
-      donecheck = donechecklist[hwtitle]
+      if hwtitle in donechecklist:
+        donecheck = donechecklist[hwtitle]
+      else: continue
       if donecheck != 0: continue #if done do not show
       self.templbl2.visible = False
       self.Work_Preview.add_component(Label(text= "Homework Task: " + row["Homework_Title"], align="center"))
@@ -123,7 +125,9 @@ class Dashboard_Page(Dashboard_PageTemplate):
       donechecklist = donecheckrow['Homework_List']
       hwtitle = row['Homework_Title']
       if donechecklist is None: continue
-      donecheck = donechecklist[hwtitle]
+      if hwtitle in donechecklist:
+        donecheck = donechecklist[hwtitle]
+      else: continue
       if donecheck != 2: continue #if not done do not show
       if dbcount > dbcap: return #if over 3 items do not show
       self.templbl.visible = False

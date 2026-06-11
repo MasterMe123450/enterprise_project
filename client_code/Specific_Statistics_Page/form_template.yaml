@@ -1,0 +1,106 @@
+components:
+- components:
+  - layout_properties: {grid_position: 'MNYAPR,QHLMHB'}
+    name: label_1
+    properties: {align: center, background: 'theme:Primary Container', bold: true, font: '', font_size: 48, foreground: 'theme:Primary', text: Statistics}
+    type: Label
+  - layout_properties: {grid_position: 'TLXGKH,HGKSHP'}
+    name: Statistics_Redirect2
+    properties: {background: 'theme:Primary Container', text: Click here to return to statistics about you!}
+    type: Button
+  - layout_properties: {grid_position: 'RJMXFI,DBBHBQ'}
+    name: label_2
+    properties: {text: Select the item you would like to see statistics about.}
+    type: Label
+  - layout_properties: {grid_position: 'EIDHBB,KAQHOB'}
+    name: Selection_Dropdown
+    properties: {include_placeholder: true}
+    type: DropDown
+  - layout_properties: {grid_position: 'TLSDTR,LDLEQR'}
+    name: Load_Button
+    properties: {background: 'theme:Primary Container', text: Load Statistics}
+    type: Button
+  - components:
+    - name: repeating_panel_1
+      properties: {item_template: Specific_Statistics_Page.RowTemplate1}
+      type: RepeatingPanel
+    layout_properties: {grid_position: 'WDEJOB,VSTMHE'}
+    name: data_grid_1
+    properties:
+      auto_header: true
+      columns:
+      - {data_key: Uploader, id: JKSDUP, title: Name}
+      - {data_key: Marks, id: VJQQOR, title: Mark}
+    type: DataGrid
+  layout_properties: {slot: default}
+  name: content_panel
+  properties: {}
+  type: ColumnPanel
+- layout_properties: {slot: nav-right}
+  name: navbar_links
+  properties: {}
+  type: FlowPanel
+- components:
+  - layout_properties: {grid_position: 'MNRUNG,GEVNUY'}
+    name: dashboard_redirect
+    properties:
+      background: theme:Primary Container
+      spacing:
+        margin: [null, null, '35', null]
+      text: Dashboard
+    type: Button
+  - layout_properties: {grid_position: 'SSGFQL,BEGYZC'}
+    name: homework_redirect
+    properties:
+      background: theme:Primary Container
+      spacing:
+        margin: ['35', null, '35', null]
+      text: Homework
+    type: Button
+  - layout_properties: {grid_position: 'JBGQZC,YHHZLV'}
+    name: worksheet_redirect
+    properties:
+      background: theme:Primary Container
+      border: ''
+      spacing:
+        margin: ['35', null, '35', '0']
+      text: Worksheets
+    type: Button
+  - layout_properties: {grid_position: 'QTJCXI,QNLRXK'}
+    name: statistics_redirect
+    properties:
+      background: theme:Primary Container
+      spacing:
+        margin: ['35', null, '35', null]
+      text: Statistics
+    type: Button
+  - layout_properties: {grid_position: 'HIUMGV,GTFNLE'}
+    name: tutor_redirect
+    properties:
+      background: theme:Primary Container
+      font_size: 12
+      spacing:
+        margin: ['35', null, '35', null]
+        padding: [null, null, null, null]
+      text: |-
+        SUPER SPECIAL
+        TUTOR BUTTON
+      visible: false
+    type: Button
+  - layout_properties: {grid_position: 'TLXXMP,NOGQWF'}
+    name: Logout_Button
+    properties:
+      background: theme:Primary Container
+      spacing:
+        margin: ['100', null, null, null]
+        padding: [null, null, null, null]
+      text: Sign Out
+    type: Button
+  layout_properties: {slot: left-nav}
+  name: column_panel_1
+  properties: {}
+  type: ColumnPanel
+container:
+  properties: {html: '@theme:standard-page.html'}
+  type: HtmlTemplate
+is_package: true

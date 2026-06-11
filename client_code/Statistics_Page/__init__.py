@@ -146,7 +146,6 @@ class Statistics_Page(Statistics_PageTemplate):
               totalmarkrow = app_tables.homeworkfiles.get(Homework_Title=hwrow["Homework_Title"])
               totalmark = totalmarkrow["Total_Marks"]
               topictotal += topicmark/totalmark
-              print(topicmark/totalmark)
               totaltasks += 1
       if totaltasks != 0:
         topicaverage = topictotal/totaltasks*100
@@ -171,8 +170,6 @@ class Statistics_Page(Statistics_PageTemplate):
       ydata.append(value)
     xdata.append("All topics")
     ydata.append(userhwrow['Average Mark'])
-    print(xdata)
-    print(ydata)
     if xdata is not None and ydata is not None:
       self.TBT_Plot.data = [ 
         go.Bar(
@@ -199,6 +196,11 @@ class Statistics_Page(Statistics_PageTemplate):
     anvil.users.logout()
     open_form('LogIn_Page')
 
+  @handle("dashboard_redirect", "click")
+  def dashboard_redirect_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    open_form('Dashboard_Page')
+  
   @handle("tutor_redirect", "click")
   def tutor_redirect_click(self, **event_args):
     """This method is called when the button is clicked"""
@@ -218,6 +220,12 @@ class Statistics_Page(Statistics_PageTemplate):
   def statistics_redirect_click(self, **event_args):
     """This method is called when the button is clicked"""
     open_form('Statistics_Page')
+
+  @handle("IndividualStat_Redirect", "click")
+  def IndividualStat_Redirect_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    open_form('Specific_Statistics_Page')
+
 
 
 

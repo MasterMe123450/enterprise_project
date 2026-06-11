@@ -27,7 +27,9 @@ class Homework_Page(Homework_PageTemplate):
       donecheckrow = app_tables.homework.get(Student=currentuser)
       donechecklist = donecheckrow['Homework_List']
       hwtitle = row['Homework_Title']
-      donecheck = donechecklist[hwtitle]
+      if hwtitle in donechecklist:
+        donecheck = donechecklist[hwtitle]
+      else: continue
       if donecheck != 0: continue #if done do not show
       self.tmp_lbl2.visible = False
       xyp = XYPanel(width=250, height=250, border="solid 1px")
@@ -58,7 +60,9 @@ class Homework_Page(Homework_PageTemplate):
       donecheckrow = app_tables.homework.get(Student=currentuser)
       donechecklist = donecheckrow['Homework_List']
       hwtitle = row['Homework_Title']
-      donecheck = donechecklist[hwtitle]
+      if hwtitle in donechecklist:
+        donecheck = donechecklist[hwtitle]
+      else: continue
       if donecheck != 1: continue #if not done do not show
       self.tmp_lbl3.visible = False
       xyp = XYPanel(width=250, height=250, border="solid 1px")
@@ -90,7 +94,9 @@ class Homework_Page(Homework_PageTemplate):
       donecheckrow = app_tables.homework.get(Student=currentuser)
       donechecklist = donecheckrow['Homework_List']
       hwtitle = row['Homework_Title']
-      donecheck = donechecklist[hwtitle]
+      if hwtitle in donechecklist:
+        donecheck = donechecklist[hwtitle]
+      else: continue
       if donecheck != 2: continue #if not done do not show
       self.tmp_lbl1.visible = False
       markedrow = app_tables.finishedhomeworkfiles.get(Homework_Title=hwtitle, Uploader=currentuser)
