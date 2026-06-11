@@ -47,7 +47,7 @@ class Specific_Statistics_Page(Specific_Statistics_PageTemplate):
     marklist.sort()
     averagemark = 0
     if len(marklist) == 0:
-      print("This task does not exist!")
+      print("This task does not exist!
     else:
       for i in marklist:
         averagemark += i
