@@ -10,7 +10,7 @@ components:
   type: ColumnPanel
 - layout_properties: {slot: default}
   name: label_1
-  properties: {text: Placeholder text}
+  properties: {text: 'BEAM portal landing page, if you do not get an automatic login form, reload'}
   type: Label
 container:
   properties: {html: '@theme:standard-page.html'}

@@ -66,6 +66,7 @@ class Specific_Statistics_Page(Specific_Statistics_PageTemplate):
     self.Distribution_Plot.data = [
       go.Box(x = marklist)
     ]
+    
   @handle("Selection_Dropdown", "show")
   def Selection_Dropdown_show(self, **event_args):
     """This method is called when the DropDown is shown on the screen"""
