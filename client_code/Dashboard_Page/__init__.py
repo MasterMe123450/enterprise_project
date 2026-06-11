@@ -99,19 +99,20 @@ class Dashboard_Page(Dashboard_PageTemplate):
       dbcount += 1
     
     #cheeky lil average update
-    marklist = 0
-    totalwork = 0
-    for row in app_tables.finishedhomeworkfiles.search():
-      if row['Uploader'] != currentuser: continue
-      if row['Marks'] is None: continue
-      markgiven = int(row['Marks'])
-      tmarkrow = app_tables.homeworkfiles.get(Homework_Title=row['Homework_Title'])
-      totalmarks = int(tmarkrow["Total_Marks"])
-      percentage = round(markgiven/totalmarks, 1) * 100
-      marklist += percentage
-      totalwork+=1
-    if totalwork != 0: marklist/=totalwork
-    currentuserhwdata['Average Mark'] = marklist
+    if not anvil.server.call('tutor_perms'):
+      marklist = 0
+      totalwork = 0
+      for row in app_tables.finishedhomeworkfiles.search():
+        if row['Uploader'] != currentuser: continue
+        if row['Marks'] is None: continue
+        markgiven = int(row['Marks'])
+        tmarkrow = app_tables.homeworkfiles.get(Homework_Title=row['Homework_Title'])
+        totalmarks = int(tmarkrow["Total_Marks"])
+        percentage = round(markgiven/totalmarks, 1) * 100
+        marklist += percentage
+        totalwork+=1
+      if totalwork != 0: marklist/=totalwork
+      currentuserhwdata['Average Mark'] = marklist
 
     
   @handle("Homework_Returned_Container", "show")

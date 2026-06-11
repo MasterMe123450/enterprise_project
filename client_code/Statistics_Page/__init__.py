@@ -74,7 +74,8 @@ class Statistics_Page(Statistics_PageTemplate):
     
     if totalwork!= 0: marklist/=totalwork
     else: marklist = 0
-    currentuserhwdata['Average Mark'] = marklist
+    if not anvil.server.call('tutor_perms'):
+     currentuserhwdata['Average Mark'] = marklist
     self.Average_Mark_KPI.text = "Average Mark: " + str(marklist) + "%"
 
     #Homework Completion Rate KPI
