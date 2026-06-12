@@ -27,28 +27,29 @@ class Homework_Page(Homework_PageTemplate):
       donecheckrow = app_tables.homework.get(Student=currentuser)
       donechecklist = donecheckrow['Homework_List']
       hwtitle = row['Homework_Title']
-      if hwtitle in donechecklist:
-        donecheck = donechecklist[hwtitle]
-      else: continue
-      if donecheck != 0: continue #if done do not show
-      self.tmp_lbl2.visible = False
-      xyp = XYPanel(width=250, height=250, border="solid 1px")
-      self.Homework_Container.add_component(xyp)
-      
-      titlelbl = Label(text = row["Homework_Title"],align = "center")
-      xyp.add_component(titlelbl, x=20, y=10)
-
-      dd = str(row['Due_Date']) 
-      dd = dd.split(" ")
-      ddlbl = Label(text = "Due: " + str(dd[0]), align="center")
-      xyp.add_component(ddlbl, x=20, y=30)
-
-      btn = Button(text="Submit", align="right", background="#EADDFF")
-      btn.set_event_handler('click', self.redirect)
-      xyp.add_component(btn, x=10, y=200)
-      
-      dlink = Link(text="Download", align = "left", url=row['Homework_File'])
-      xyp.add_component(dlink, x=150, y=202)
+      if donechecklist is not None:
+        if hwtitle in donechecklist:
+          donecheck = donechecklist[hwtitle]
+        else: continue
+        if donecheck != 0: continue #if done do not show
+        self.tmp_lbl2.visible = False
+        xyp = XYPanel(width=250, height=250, border="solid 1px")
+        self.Homework_Container.add_component(xyp)
+        
+        titlelbl = Label(text = row["Homework_Title"],align = "center")
+        xyp.add_component(titlelbl, x=20, y=10)
+  
+        dd = str(row['Due_Date']) 
+        dd = dd.split(" ")
+        ddlbl = Label(text = "Due: " + str(dd[0]), align="center")
+        xyp.add_component(ddlbl, x=20, y=30)
+  
+        btn = Button(text="Submit", align="right", background="#EADDFF")
+        btn.set_event_handler('click', self.redirect)
+        xyp.add_component(btn, x=10, y=200)
+        
+        dlink = Link(text="Download", align = "left", url=row['Homework_File'])
+        xyp.add_component(dlink, x=150, y=202)
 
 
   #Show cards of all completed work
@@ -59,6 +60,7 @@ class Homework_Page(Homework_PageTemplate):
       currentuser = anvil.users.get_user()
       donecheckrow = app_tables.homework.get(Student=currentuser)
       donechecklist = donecheckrow['Homework_List']
+      if donechecklist is None: continue
       hwtitle = row['Homework_Title']
       if hwtitle in donechecklist:
         donecheck = donechecklist[hwtitle]
@@ -93,6 +95,7 @@ class Homework_Page(Homework_PageTemplate):
       currentuser = anvil.users.get_user()
       donecheckrow = app_tables.homework.get(Student=currentuser)
       donechecklist = donecheckrow['Homework_List']
+      if donechecklist is None: continue
       hwtitle = row['Homework_Title']
       if hwtitle in donechecklist:
         donecheck = donechecklist[hwtitle]
