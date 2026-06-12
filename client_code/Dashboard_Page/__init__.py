@@ -49,22 +49,22 @@ class Dashboard_Page(Dashboard_PageTemplate):
     currentuserhwdata['Work Due Soon'] = notdonecounter
     currentuserhwdata['Work Returned'] = returnedcounter
     #each text box displays data
-    if currentuserhwdata["Work Returned"] > 1:
+    if currentuserhwdata["Work Returned"] != 1:
       self.Homework_Returned.text = str(currentuserhwdata["Work Returned"]) + " tasks returned!"
     else:
        self.Homework_Returned.text = str(currentuserhwdata["Work Returned"]) + " task returned!"
 
-    if currentuserhwdata["Work Overdue"] > 1:
+    if currentuserhwdata["Work Overdue"] != 1:
       self.Homework_Overdue.text = str(currentuserhwdata["Work Overdue"]) + " tasks overdue!"
     else:
       self.Homework_Overdue.text = str(currentuserhwdata["Work Overdue"]) + " task overdue!"
 
-    if currentuserhwdata["Work Due Soon"]  > 1:
+    if currentuserhwdata["Work Due Soon"]  != 1:
       self.Homework_Due_Soon.text = str(currentuserhwdata["Work Due Soon"]) + " tasks due soon!"
     else:
       self.Homework_Due_Soon.text = str(currentuserhwdata["Work Due Soon"]) + " task due soon!" 
 
-    if currentuserhwdata["Work Pending Marks"]  > 1:
+    if currentuserhwdata["Work Pending Marks"]  != 1:
       self.Homework_Pending.text = str(currentuserhwdata["Work Pending Marks"]) + " tasks pending!"
     else:
       self.Homework_Pending.text = str(currentuserhwdata["Work Pending Marks"]) + " task pending!"
