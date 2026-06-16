@@ -25,6 +25,5 @@ class LogIn_Page(LogIn_PageTemplate):
       if currentuserhwdata is None:
         app_tables.homework.add_row(Student=currentuser)
       open_form('Dashboard_Page')
-
     else: 
       anvil.users.login_with_form()

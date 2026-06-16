@@ -91,6 +91,14 @@ components:
     name: Work_Preview
     properties: {border: 'solid 2px purple '}
     type: ColumnPanel
+  - layout_properties: {grid_position: 'DTFAWS,OLKMDB'}
+    name: edgecaselbl
+    properties: {text: 'There would be an average plot here, but you do not have any returned work.', visible: false}
+    type: Label
+  - layout_properties: {grid_position: 'MXHDFL,QBCSDN'}
+    name: average_plot
+    properties: {}
+    type: Plot
   layout_properties: {slot: default}
   name: content_panel
   properties:

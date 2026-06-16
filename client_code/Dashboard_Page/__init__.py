@@ -1,12 +1,13 @@
 from ._anvil_designer import Dashboard_PageTemplate
 from anvil import *
+import plotly.graph_objects as go
 from datetime import *
 import anvil.server
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.users
-
+currentuser = anvil.users.get_user()
 class Dashboard_Page(Dashboard_PageTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
@@ -75,20 +76,23 @@ class Dashboard_Page(Dashboard_PageTemplate):
     if currentuserhwdata["Work Returned"]>0:
       self.Homework_Returned.background = "#90EE90"
     #Displays a preview of the lastest things uploaded
-    #maybe max of 3?
+    #maybe max of 3? yep 3 is good!
     dbcap = 3
     dbcount = 1
     for row in app_tables.homeworkfiles.search():
       if dbcount > dbcap: return #if at cap do not show
-        
+      #create temp variables
       donecheckrow = app_tables.homework.get(Student=currentuser)
       donechecklist = donecheckrow['Homework_List']
       hwtitle = row['Homework_Title']
+      #if homework file exists
       if donechecklist is None: continue
       if hwtitle in donechecklist:
         donecheck = donechecklist[hwtitle]
       else: continue
       if donecheck != 0: continue #if done do not show
+      #Create node for the upcoming task
+      #Create variables for the daets of the tasks and then compare to only show the 3 most recent? Currently shows the upload order
       self.templbl2.visible = False
       self.Work_Preview.add_component(Label(text= "Homework Task: " + row["Homework_Title"], align="center"))
       date = str(row["Due_Date"])
@@ -118,19 +122,23 @@ class Dashboard_Page(Dashboard_PageTemplate):
   @handle("Homework_Returned_Container", "show")
   def Homework_Returned_Container_show(self, **event_args):
     """This method is called when the FlowPanel is shown on the screen"""
+    #cap of 3 items shown
     dbcap = 3
     dbcount = 1
     for row in app_tables.homeworkfiles.search():
+      #create temp variables
       currentuser = anvil.users.get_user()
       donecheckrow = app_tables.homework.get(Student=currentuser)
       donechecklist = donecheckrow['Homework_List']
       hwtitle = row['Homework_Title']
+      #if exists
       if donechecklist is None: continue
       if hwtitle in donechecklist:
         donecheck = donechecklist[hwtitle]
       else: continue
       if donecheck != 2: continue #if not done do not show
       if dbcount > dbcap: return #if over 3 items do not show
+      #create container + remove placeholder text
       self.templbl.visible = False
       markedrow = app_tables.finishedhomeworkfiles.get(Homework_Title=hwtitle, Uploader=currentuser)
       self.Homework_Returned_Container.add_component(Label(text= "Homework Task Returned: " + hwtitle, align= "center"))
@@ -138,13 +146,54 @@ class Dashboard_Page(Dashboard_PageTemplate):
       self.Homework_Returned_Container.add_component(Label(text="Check the homework page to see your total mark.", align="center"))
       self.Homework_Returned_Container.add_component(Spacer(height=20))
       dbcount += 1
-  
+
+      
+  @handle("average_plot", "show")
+  def average_plot_show(self, **event_args):
+    """This method is called when the Plot is shown on the screen"""
+    xdata = []
+    ydata = []
+    for row in app_tables.finishedhomeworkfiles.search():
+      if row['Uploader'] != currentuser: continue
+      if row['Marks'] is None: continue
+      xdata.append(str(row['Homework_Title']))
+      markgiven = int(row['Marks'])
+      tmarkrow = app_tables.homeworkfiles.get(Homework_Title=row['Homework_Title'])
+      totalmarks = int(tmarkrow["Total_Marks"])
+      percentage = round(markgiven/totalmarks*100,1)
+      ydata.append(str(percentage) + "%")
+    if xdata is not None and ydata is not None:
+      self.average_plot.data = [
+        go.Scatter(
+          x = xdata,
+          y = ydata,
+          marker = dict(color= 'rgb(139, 116, 204)')
+        )
+      ]
+      self.average_plot.layout = {
+        'xaxis': {
+          'title': {'text': 'Task'},
+        },
+        'yaxis': {
+          'title': {'text': 'Mark as %'},
+          'range': (0,100)
+        }
+      }
+    else:
+      self.edgecaselbl.visible = True
+
+
   @handle("Logout_Button", "click")
   def Logout_Button_click(self, **event_args):
     """This method is called when the button is clicked"""
     anvil.users.logout()
     open_form('LogIn_Page')
-
+    
+  @handle("dashboard_redirect", "click")
+  def dashboard_redirect_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    open_form('Dashboard_Page')
+    
   @handle("tutor_redirect", "click")
   def tutor_redirect_click(self, **event_args):
     """This method is called when the button is clicked"""
@@ -165,4 +214,4 @@ class Dashboard_Page(Dashboard_PageTemplate):
     """This method is called when the button is clicked"""
     open_form('Statistics_Page')
 
- 
+  

@@ -30,7 +30,7 @@ class Statistics_Page(Statistics_PageTemplate):
       markgiven = int(row['Marks'])
       tmarkrow = app_tables.homeworkfiles.get(Homework_Title=row['Homework_Title'])
       totalmarks = int(tmarkrow["Total_Marks"])
-      percentage = round(markgiven/totalmarks, 1) * 100
+      percentage = round(markgiven/totalmarks*100,2)
       ydata.append(str(percentage) + "%")
     if xdata is not None and ydata is not None:
       self.score_plot.data = [
@@ -45,7 +45,7 @@ class Statistics_Page(Statistics_PageTemplate):
           'title': {'text': 'Task'},
         },
         'yaxis': {
-          'title': {'text': 'Average Mark as %'},
+          'title': {'text': 'Mark as %'},
           'range': (0,100)
         }
       }
