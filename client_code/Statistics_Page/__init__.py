@@ -91,7 +91,8 @@ class Statistics_Page(Statistics_PageTemplate):
     #Rank, system literally checks if anyone has a higher average 
     rank = 1
     for row in app_tables.homework.search():
-      if row['Average Mark'] > currentuserhwdata['Average Mark']: rank +=1
+      if row['Average Mark'] is not None and currentuserhwdata['Average Mark'] is not None:
+        if row['Average Mark'] > currentuserhwdata['Average Mark']: rank +=1
     self.Class_Rank_KPI.text = "Class Rank: " + str(rank)
 
   #Show average plot when clicked
