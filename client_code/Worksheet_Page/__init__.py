@@ -77,6 +77,7 @@ class Worksheet_Page(Worksheet_PageTemplate):
   def delete_button_click(self, **event_args):
     """This method is called when the button is clicked"""
     deletedfilename = self.delete_textbox.text
-    deletethatfilepls = app_tables.permanenthomeworkfiles.get(Worksheet_Title=deletedfilename)
-    deletethatfilepls.delete()
+    for row in app_tables.permanenthomeworkfiles.search():
+      if row['Worksheet_Title'] == deletedfilename:
+        row.delete()
   

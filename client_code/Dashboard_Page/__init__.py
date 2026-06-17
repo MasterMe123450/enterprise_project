@@ -44,7 +44,6 @@ class Dashboard_Page(Dashboard_PageTemplate):
           else:
             notdonecounter+=1
 
-    
     currentuserhwdata['Work Overdue'] = overduecounter
     currentuserhwdata['Work Pending Marks'] = donecounter
     currentuserhwdata['Work Due Soon'] = notdonecounter
