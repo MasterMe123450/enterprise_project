@@ -156,9 +156,7 @@ components:
       spacing:
         margin: ['35', null, '35', null]
         padding: [null, null, null, null]
-      text: |-
-        SUPER SPECIAL
-        TUTOR BUTTON
+      text: Tutor Uploads
       visible: false
     type: Button
   - layout_properties: {grid_position: 'FSIHKC,FUIEYK'}

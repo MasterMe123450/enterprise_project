@@ -37,31 +37,34 @@ class Homework_Submit_Page(Homework_Submit_PageTemplate):
   def doohickey_click(self, **event_args):
     """This method is called when the button is clicked"""
     #FILE UPLOAD
-    upload_row = app_tables.finishedhomeworkfiles.add_row()
-    upload_row['Homework_File'] = self.Homework_Upload.file
-    upload_row['Homework_Title'] = self.Homework_Upload.file.name
-
-    upload_row['Uploader'] = anvil.users.get_user()
-
-    date = datetime.now()
-    upload_row['Upload Date'] = date
-
-
-    #SELECTED HW
-    uploadtitle = self.homework_dropdown.selected_value
-
+    if self.Homework_Upload.file is not None:
+      upload_row = app_tables.finishedhomeworkfiles.add_row()
+      upload_row['Homework_File'] = self.Homework_Upload.file
+      upload_row['Homework_Title'] = self.Homework_Upload.file.name
+  
+      upload_row['Uploader'] = anvil.users.get_user()
+  
+      date = datetime.now()
+      upload_row['Upload Date'] = date
+  
+  
+      #SELECTED HW
+      if self.homework_dropdown.selected_value is not None:
+        uploadtitle = self.homework_dropdown.selected_value
     
-    upload_row['Homework_Title'] = uploadtitle
-    cuser = anvil.users.get_user()
-    hwlistrow = app_tables.homework.get(Student=cuser)
-
-    hwlist = hwlistrow["Homework_List"]
-    hwlist[uploadtitle] = 1
-
-    hwlistrow['Homework_List'] = hwlist
-
+        
+        upload_row['Homework_Title'] = uploadtitle
+        cuser = anvil.users.get_user()
+        hwlistrow = app_tables.homework.get(Student=cuser)
     
+        hwlist = hwlistrow["Homework_List"]
+        hwlist[uploadtitle] = 1
+    
+        hwlistrow['Homework_List'] = hwlist
+
+        self.feedback_label.text = "Great! The tutor will mark your work soon!"
     self.feedback_label.visible = True
+    
 
 
 

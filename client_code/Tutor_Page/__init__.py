@@ -21,22 +21,27 @@ class Tutor_Page(Tutor_PageTemplate):
   def delete_button_click(self, **event_args):
     """This method is called when the button is clicked"""
     hwrow = app_tables.homeworkfiles.get(Homework_Title = self.file_name_input.text)
+    if hwrow is None:
+      return
     for row in app_tables.homeworkfiles.search(): 
       if row == hwrow:
         row.delete()
-        #NO clue if the ones below work, kinda just gonna leave it there
     for row in app_tables.finishedhomeworkfiles.search():
       if row["Homework_Title"] == hwrow['Homework_Title']:
         row.delete()
     for row in app_tables.homework.search():
       hwlist = row['Homework_List']
-      hwlist.pop(hwrow['Homework_Title'])
-      row['Homework_List'] = hwlist
+      if hwrow in hwlist:
+        hwlist.pop(hwrow['Homework_Title'])
+        row['Homework_List'] = hwlist
 
   
   @handle("doohickey_button", "click")
   def doohickey_button_click(self, **event_args):
     #File Upload
+    if self.file_loader_1.file is None or self.file_loader_1.file.name is None: 
+      self.errorlbl.visible = True
+      return
     hwrow = app_tables.homeworkfiles.add_row(Homework_File=self.file_loader_1.file, Homework_Title=self.file_loader_1.file.name)
     phwrow = app_tables.permanenthomeworkfiles.add_row(Worksheet_File= self.file_loader_1.file)
     #When there is a file in the file upload, and a date in the textbox, it adds/changes a duedate for that file
@@ -45,11 +50,12 @@ class Tutor_Page(Tutor_PageTemplate):
     hwrow["Due_Date"] = duedateformat
     self.upload_feedback.visible = True
     hwrow["Homework_Title"] = self.file_name_input.text 
-    if self.file_name_input.text is not None: self.file_name_input_feedback.visible = True
+    if self.file_name_input.text is  None: self.file_name_input_feedback.text = "The work has been uploaded with no title"
+    self.file_name_input_feedback.visible = True
     phwrow["Worksheet_Title"] = self.file_name_input.text
-    
-    hwrow['Total_Marks'] = int(self.marks_input.text)
-    if self.mark_input_feedback.text is not None: self.mark_input_feedback.visible = True
+    if self.marks_input.text is not None: hwrow['Total_Marks'] = int(self.marks_input.text)
+    if self.marks_input.text is None:self.mark_input_feedback.text = "The work has been uploaded with no mark. If this was not your intention, delete the file and try again"
+    self.mark_input_feedback.visible = True
     hwrow['Topic'] = self.Topic_Dropdown.selected_value
     if self.Topic_Dropdown.selected_value == "mixed":
       topicbreakdown = {}
@@ -57,10 +63,14 @@ class Tutor_Page(Tutor_PageTemplate):
       topic1marks = self.topic1_markinput.text
       topic2 = self.topic_dropdown_2.selected_value
       topic2marks = self.topic2_markinput.text
-      topicbreakdown[topic1] = topic1marks
-      topicbreakdown[topic2] = topic2marks
-      hwrow['Topics_Marks'] = topicbreakdown
-    if self.Topic_Dropdown.selected_value is not None: self.topic_input_feedback.visible = True
+      if topic1 is None or topic2 is None or topic1marks is None or topic2marks is None:
+        self.topic_input_feedback.text = "Missing values in topic selection. The work has been uploaded with no topic."
+      else:
+        topicbreakdown[topic1] = topic1marks
+        topicbreakdown[topic2] = topic2marks
+        hwrow['Topics_Marks'] = topicbreakdown
+    if self.Topic_Dropdown.selected_value is None: self.topic_input_feedback.text = "The work has been uploaded with no topic"
+    self.topic_input_feedback.visible = True
     for row in app_tables.homework.search():
       if row["Homework_List"] is None:
         row['Homework_List'] = {}

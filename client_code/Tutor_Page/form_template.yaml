@@ -1,9 +1,14 @@
 components:
 - components:
-  - layout_properties: {grid_position: 'ITKJJP,BYYQND'}
-    name: label_1
-    properties: {text: super sexy tutor only file upload zone}
-    type: Label
+  - components:
+    - layout_properties: {grid_position: 'UPYNTU,HJHSGD'}
+      name: label_1
+      properties: {align: center, background: 'theme:Primary Container', bold: true, font: '', font_size: 48, foreground: 'theme:Primary', text: Create Work Task For Students}
+      type: Label
+    layout_properties: {grid_position: 'WJJUFT,ILVQLA'}
+    name: column_panel_2
+    properties: {background: 'theme:Primary Container'}
+    type: ColumnPanel
   - layout_properties: {grid_position: 'SQHNKD,QBDKDG'}
     name: Marking_Redirect
     properties:
@@ -106,6 +111,10 @@ components:
     name: send_feedback
     properties: {align: center, bold: false, font_size: 18, text: Done! Students will now see the work you have uploaded., visible: false}
     type: Label
+  - layout_properties: {grid_position: 'SAEACW,HPKUPO'}
+    name: errorlbl
+    properties: {text: No file has been attached/The file is invalid. Add a file and try again., visible: false}
+    type: Label
   - layout_properties: {grid_position: 'SCZVBX,RDMDSY'}
     name: spacer_1
     properties: {height: 34.70367431640625}
@@ -176,9 +185,7 @@ components:
       spacing:
         margin: ['35', null, '35', null]
         padding: [null, null, null, null]
-      text: |-
-        SUPER SPECIAL
-        TUTOR BUTTON
+      text: Tutor Uploads
       visible: false
     type: Button
   - layout_properties: {grid_position: 'DLICZG,ZWTJJO'}
