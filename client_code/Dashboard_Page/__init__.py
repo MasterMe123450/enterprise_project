@@ -37,12 +37,13 @@ class Dashboard_Page(Dashboard_PageTemplate):
           returnedcounter +=1        
         else: #buuuuuut, if its false, check its date to see if its upcoming or overdue
           hwdd = app_tables.homeworkfiles.get(Homework_Title=key)
-          duedate = hwdd['Due_Date']
-          currentdate = datetime.now(timezone.utc)
-          if duedate < currentdate:
-            overduecounter+=1
-          else:
-            notdonecounter+=1
+          if hwdd is not None:
+            duedate = hwdd['Due_Date']
+            currentdate = datetime.now(timezone.utc)
+            if duedate < currentdate:
+              overduecounter+=1
+            else:
+              notdonecounter+=1
 
     currentuserhwdata['Work Overdue'] = overduecounter
     currentuserhwdata['Work Pending Marks'] = donecounter

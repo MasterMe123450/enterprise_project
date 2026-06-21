@@ -26,7 +26,7 @@ class Worksheet_Page(Worksheet_PageTemplate):
   def worksheet_container_show(self, **event_args):
     """This method is called when the FlowPanel is shown on the screen"""
     for row in app_tables.permanenthomeworkfiles.search():
-      xyp = XYPanel(width=250, height=250, border="solid 1px")
+      xyp = XYPanel(width=250, height=250, border="solid 2px")
       self.worksheet_container.add_component(xyp)
 
       titlelbl = Label(text = row["Worksheet_Title"],align = "center")
