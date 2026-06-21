@@ -71,11 +71,11 @@ components:
     name: tutor_redirect
     properties:
       background: theme:Primary Container
-      font_size: 12
+      font_size: 14
       spacing:
         margin: ['35', null, '35', null]
         padding: [null, null, null, null]
-      text: Tutor Uploads
+      text: Tutor Side
       visible: false
     type: Button
   - layout_properties: {grid_position: 'CUQDCK,ALGALM'}

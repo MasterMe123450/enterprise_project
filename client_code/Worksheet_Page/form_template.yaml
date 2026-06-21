@@ -28,7 +28,7 @@ components:
   - layout_properties: {grid_position: 'RQAOGO,BDDCLY'}
     name: worksheet_container
     properties:
-      border: solid 2px purple
+      border: 'solid 2px purple '
       spacing:
         padding: [null, null, null, '10']
     type: FlowPanel
@@ -86,11 +86,11 @@ components:
     name: tutor_redirect
     properties:
       background: theme:Primary Container
-      font_size: 12
+      font_size: 14
       spacing:
         margin: ['35', null, '35', null]
         padding: [null, null, null, null]
-      text: Tutor Uploads
+      text: Tutor Side
       visible: false
     type: Button
   - layout_properties: {grid_position: 'YJQKMG,RIHSSS'}

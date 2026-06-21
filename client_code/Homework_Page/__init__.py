@@ -33,7 +33,7 @@ class Homework_Page(Homework_PageTemplate):
         else: continue
         if donecheck != 0: continue #if done do not show
         self.tmp_lbl2.visible = False
-        xyp = XYPanel(width=250, height=250, border="solid 1px")
+        xyp = XYPanel(width=250, height=250, border="solid 1px", border-ra)
         self.Homework_Container.add_component(xyp)
         
         titlelbl = Label(text = row["Homework_Title"],align = "center")
