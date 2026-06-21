@@ -22,7 +22,7 @@ components:
     name: Homework_Marking_Container
     properties:
       background: theme:Secondary Container
-      border: solid 2px purple
+      border: inset 3px purple
       spacing:
         padding: [null, '10', null, '10']
     type: FlowPanel

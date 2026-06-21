@@ -17,7 +17,7 @@ components:
     name: Homework_Returned_Container
     properties:
       background: theme:Secondary Container
-      border: 2px solid purple
+      border: 2px inset purple
       spacing:
         padding: [null, null, null, '10']
     type: FlowPanel
@@ -34,7 +34,7 @@ components:
     name: Homework_Container
     properties:
       background: theme:Secondary Container
-      border: 2px solid purple
+      border: 2px inset purple
       spacing:
         padding: [null, null, null, '10']
     type: FlowPanel
@@ -51,7 +51,7 @@ components:
     name: Homework_Complete_Container
     properties:
       background: theme:Secondary Container
-      border: 2px solid purple
+      border: 2px inset purple
       spacing:
         padding: [null, null, null, '10']
     type: FlowPanel

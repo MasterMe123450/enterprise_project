@@ -29,7 +29,7 @@ components:
     name: worksheet_container
     properties:
       background: theme:Secondary Container
-      border: 2px purple radius
+      border: 2px purple inset
       spacing:
         padding: [null, null, null, '10']
     type: FlowPanel

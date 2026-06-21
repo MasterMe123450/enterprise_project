@@ -19,7 +19,7 @@ components:
     type: FileLoader
   - layout_properties: {grid_position: 'RKLRRL,USFQFC'}
     name: label_3
-    properties: {text: Please enter the title of the worksheet below (use textbox if dropdown unavailable)}
+    properties: {text: 'Please select the title of the worksheet below:'}
     type: Label
   - data_bindings: []
     layout_properties: {grid_position: 'PAJIBT,UEODWU'}

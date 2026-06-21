@@ -31,7 +31,7 @@ components:
         font: ''
         icon_align: left_edge
         spacing:
-          margin: [null, '50', null, '50']
+          margin: [null, '50', null, '0']
           padding: [null, '10', null, '10']
         text: 'Number of students: '
       type: Label
@@ -74,7 +74,7 @@ components:
       background: ''
       border: solid 2px purple
       spacing:
-        padding: ['10', null, '10', null]
+        padding: ['10', null, '10', '50']
       visible: false
     type: FlowPanel
   - components:

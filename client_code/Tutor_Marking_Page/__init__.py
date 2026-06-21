@@ -38,7 +38,7 @@ class Tutor_Marking_Page(Tutor_Marking_PageTemplate):
         for key in topic.keys():
           topics.append(key)
         topicslbl = Label(text= "Topics: " + str(topics), bold = True, font_size=18)
-      fp = FlowPanel(border= "solid 2px purple")
+      fp = FlowPanel(border= "inset 3px purple")
       self.add_component(title)
       self.add_component(topicslbl)
       self.tag['hwfp'][i] = fp
@@ -51,7 +51,7 @@ class Tutor_Marking_Page(Tutor_Marking_PageTemplate):
       self.tmplbl_1.visible = False
       topicextraoffset = 0
       if hwrow['Topics_Marks'] is None:
-        xyp = XYPanel(width=250, height=250, border="solid 1px")
+        xyp = XYPanel(width=250, height=250, border="solid 2px")
       else:
         topiclist = hwrow['Topics_Marks']
         for key in topiclist.keys():
