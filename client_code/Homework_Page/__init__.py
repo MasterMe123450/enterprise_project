@@ -6,7 +6,9 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
-
+currentuser = anvil.users.get_user()
+donecheckrow = app_tables.homework.get(Student=currentuser)
+donechecklist = donecheckrow['Homework_List']
 class Homework_Page(Homework_PageTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
@@ -23,8 +25,6 @@ class Homework_Page(Homework_PageTemplate):
   def Homework_Container_show(self, **event_args):
     """This method is called when the FlowPanel is shown on the screen"""
     for row in app_tables.homeworkfiles.search():
-      currentuser = anvil.users.get_user()
-      donecheckrow = app_tables.homework.get(Student=currentuser)
       donechecklist = donecheckrow['Homework_List']
       hwtitle = row['Homework_Title']
       if donechecklist is not None:
@@ -57,8 +57,6 @@ class Homework_Page(Homework_PageTemplate):
   def Homework_Complete_Container_show(self, **event_args):
     """This method is called when the FlowPanel is shown on the screen"""
     for row in app_tables.homeworkfiles.search():
-      currentuser = anvil.users.get_user()
-      donecheckrow = app_tables.homework.get(Student=currentuser)
       donechecklist = donecheckrow['Homework_List']
       if donechecklist is None: continue
       hwtitle = row['Homework_Title']
@@ -92,9 +90,6 @@ class Homework_Page(Homework_PageTemplate):
   def Homework_Returned_Container_show(self, **event_args):
     """This method is called when the FlowPanel is shown on the screen"""
     for row in app_tables.homeworkfiles.search():
-      currentuser = anvil.users.get_user()
-      donecheckrow = app_tables.homework.get(Student=currentuser)
-      donechecklist = donecheckrow['Homework_List']
       if donechecklist is None: continue
       hwtitle = row['Homework_Title']
       if hwtitle in donechecklist:

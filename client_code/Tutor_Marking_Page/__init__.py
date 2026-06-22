@@ -51,7 +51,7 @@ class Tutor_Marking_Page(Tutor_Marking_PageTemplate):
       self.tmplbl_1.visible = False
       topicextraoffset = 0
       if hwrow['Topics_Marks'] is None:
-        xyp = XYPanel(width=250, height=250, border="solid 2px")
+        xyp = XYPanel(width=250, height=250, border="inset 3px purple")
       else:
         topiclist = hwrow['Topics_Marks']
         for key in topiclist.keys():

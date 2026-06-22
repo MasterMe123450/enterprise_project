@@ -8,6 +8,10 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.users
 currentuser = anvil.users.get_user()
+currentuserhwdata = app_tables.homework.get(Student=currentuser)
+hwlist = currentuserhwdata["Homework_List"]
+donecheckrow = app_tables.homework.get(Student=currentuser)
+donechecklist = donecheckrow['Homework_List']
 class Dashboard_Page(Dashboard_PageTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
@@ -19,9 +23,7 @@ class Dashboard_Page(Dashboard_PageTemplate):
     #Top dashboard summary info
     #MOVE IT TO CONTAINER_SHOW TO LOAD WHILE THE USER IS ALREADY ON THE PAGE?
     #get the user hwtables
-    currentuser = anvil.users.get_user()
-    currentuserhwdata = app_tables.homework.get(Student=currentuser)
-    hwlist = currentuserhwdata["Homework_List"]
+
     #count the number of submissions and overdue
     notdonecounter = 0
     overduecounter = 0
@@ -82,8 +84,6 @@ class Dashboard_Page(Dashboard_PageTemplate):
     for row in app_tables.homeworkfiles.search():
       if dbcount > dbcap: return #if at cap do not show
       #create temp variables
-      donecheckrow = app_tables.homework.get(Student=currentuser)
-      donechecklist = donecheckrow['Homework_List']
       hwtitle = row['Homework_Title']
       #if homework file exists
       if donechecklist is None: continue
@@ -127,9 +127,6 @@ class Dashboard_Page(Dashboard_PageTemplate):
     dbcount = 1
     for row in app_tables.homeworkfiles.search():
       #create temp variables
-      currentuser = anvil.users.get_user()
-      donecheckrow = app_tables.homework.get(Student=currentuser)
-      donechecklist = donecheckrow['Homework_List']
       hwtitle = row['Homework_Title']
       #if exists
       if donechecklist is None: continue
