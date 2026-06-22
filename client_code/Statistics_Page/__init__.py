@@ -15,7 +15,21 @@ class Statistics_Page(Statistics_PageTemplate):
     
     if anvil.server.call('tutor_perms'):
       self.tutor_redirect.visible = True
-      
+    
+    if not anvil.server.call('tutor_perms'):
+      marklist = 0
+      totalwork = 0
+      for row in app_tables.finishedhomeworkfiles.search():
+        if row['Uploader'] != currentuser: continue
+        if row['Marks'] is None: continue
+        markgiven = int(row['Marks'])
+        tmarkrow = app_tables.homeworkfiles.get(Homework_Title=row['Homework_Title'])
+        totalmarks = int(tmarkrow["Total_Marks"])
+        percentage = round(markgiven/totalmarks, 1) * 100
+        marklist += percentage
+        totalwork+=1
+      if totalwork != 0: marklist/=totalwork
+
   
 
   @handle("score_plot", "show")

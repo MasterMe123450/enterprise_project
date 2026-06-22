@@ -37,7 +37,7 @@ class Homework_Submit_Page(Homework_Submit_PageTemplate):
   def doohickey_click(self, **event_args):
     """This method is called when the button is clicked"""
     #FILE UPLOAD
-    if self.Homework_Upload.file is not None:
+    if self.Homework_Upload.file is not None and self.homework_dropdown.selected_value is not None:
       upload_row = app_tables.finishedhomeworkfiles.add_row()
       upload_row['Homework_File'] = self.Homework_Upload.file
       upload_row['Homework_Title'] = self.Homework_Upload.file.name
@@ -51,8 +51,6 @@ class Homework_Submit_Page(Homework_Submit_PageTemplate):
       #SELECTED HW
       if self.homework_dropdown.selected_value is not None:
         uploadtitle = self.homework_dropdown.selected_value
-    
-        
         upload_row['Homework_Title'] = uploadtitle
         cuser = anvil.users.get_user()
         hwlistrow = app_tables.homework.get(Student=cuser)

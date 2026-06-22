@@ -159,11 +159,15 @@ db_schema:
       client_hidden: true
       name: confirmed_email
       type: bool
+    - admin_ui: {}
+      client_hidden: null
+      name: email_confirmation_key
+      type: string
     indexes: []
     server: full
     title: Users
 dependencies: []
-metadata: {description: '', logo_img: 'asset:mcfyicon.jpg', title: BEAM portal}
+metadata: {description: '', logo_img: 'asset:BEAMlogo.png', title: BEAM portal}
 name: enterprise project
 package_name: enterprise_project
 renamed: true

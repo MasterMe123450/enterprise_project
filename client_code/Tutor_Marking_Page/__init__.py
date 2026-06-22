@@ -110,13 +110,12 @@ class Tutor_Marking_Page(Tutor_Marking_PageTemplate):
         topicmarklist = {}
         topicupload = None
         for key in topiclist.keys():
-          print (key)
           if row in self.tag:
             if key in self.tag[row]:
-              print (self.tag[row][key])
               topicupload = self.tag[row][key]
             else: 
-              print(key + " Not Found!")
+              print(key + " not found!")
+              pass
             if topicupload is not None:
               topicmarklist[key] = topicupload.text
       if markupload is not None and fileupload is not None:     
