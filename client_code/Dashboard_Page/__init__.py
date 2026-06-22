@@ -20,17 +20,33 @@ class Dashboard_Page(Dashboard_PageTemplate):
     if anvil.server.call('tutor_perms'):
       self.tutor_redirect.visible = True
 
-    #Top dashboard summary info
-    #MOVE IT TO CONTAINER_SHOW TO LOAD WHILE THE USER IS ALREADY ON THE PAGE?
-    #get the user hwtables
+    #cheeky lil average update
+    if not anvil.server.call('tutor_perms'):
+      marklist = 0
+      totalwork = 0
+      for row in app_tables.finishedhomeworkfiles.search():
+        if row['Uploader'] != currentuser: continue
+        if row['Marks'] is None: continue
+        markgiven = int(row['Marks'])
+        tmarkrow = app_tables.homeworkfiles.get(Homework_Title=row['Homework_Title'])
+        totalmarks = int(tmarkrow["Total_Marks"])
+        percentage = round(markgiven/totalmarks, 1) * 100
+        marklist += percentage
+        totalwork+=1
+      if totalwork != 0: marklist/=totalwork
+      currentuserhwdata['Average Mark'] = marklist
 
+  @handle("flow_panel_1", "show")
+  def flow_panel_1_show(self, **event_args):
+    """This method is called when the FlowPanel is shown on the screen"""
+    #Top KPIs
     #count the number of submissions and overdue
     notdonecounter = 0
     overduecounter = 0
     donecounter = 0
     returnedcounter = 0
     #first, check if true, if it is, the work is done!
-    
+
     if hwlist is not None: #THIS IS JUST SO WHEN TESTING/EXCEPTION IT DOESN'T THROW AN ERROR
       for key, value in hwlist.items():
         if value == 1:
@@ -55,7 +71,7 @@ class Dashboard_Page(Dashboard_PageTemplate):
     if currentuserhwdata["Work Returned"] != 1:
       self.Homework_Returned.text = str(currentuserhwdata["Work Returned"]) + " tasks returned!"
     else:
-       self.Homework_Returned.text = str(currentuserhwdata["Work Returned"]) + " task returned!"
+      self.Homework_Returned.text = str(currentuserhwdata["Work Returned"]) + " task returned!"
 
     if currentuserhwdata["Work Overdue"] != 1:
       self.Homework_Overdue.text = str(currentuserhwdata["Work Overdue"]) + " tasks overdue!"
@@ -71,19 +87,23 @@ class Dashboard_Page(Dashboard_PageTemplate):
       self.Homework_Pending.text = str(currentuserhwdata["Work Pending Marks"]) + " tasks pending!"
     else:
       self.Homework_Pending.text = str(currentuserhwdata["Work Pending Marks"]) + " task pending!"
-      
+
     #Change colour of overdue label if there is work to be done!
     if currentuserhwdata["Work Overdue"] > 0:
       self.Homework_Overdue.background = "crimson"
     if currentuserhwdata["Work Returned"]>0:
       self.Homework_Returned.background = "#90EE90"
+  
+  @handle("Work_Preview", "show")
+  def Work_Preview_show(self, **event_args):
+    """This method is called when the column panel is shown on the screen"""
     #Displays a preview of the lastest things uploaded
     #maybe max of 3? yep 3 is good!
     dbcap = 3
     dbcount = 1
     for row in app_tables.homeworkfiles.search():
       if dbcount > dbcap: return #if at cap do not show
-      #create temp variables
+        #create temp variables
       hwtitle = row['Homework_Title']
       #if homework file exists
       if donechecklist is None: continue
@@ -91,8 +111,8 @@ class Dashboard_Page(Dashboard_PageTemplate):
         donecheck = donechecklist[hwtitle]
       else: continue
       if donecheck != 0: continue #if done do not show
-      #Create node for the upcoming task
-      #Create variables for the daets of the tasks and then compare to only show the 3 most recent? Currently shows the upload order
+        #Create node for the upcoming task
+        #Create variables for the daets of the tasks and then compare to only show the 3 most recent? Currently shows the upload order
       self.templbl2.visible = False
       self.Work_Preview.add_component(Label(text= "Homework Task: " + row["Homework_Title"], align="center"))
       date = str(row["Due_Date"])
@@ -102,22 +122,6 @@ class Dashboard_Page(Dashboard_PageTemplate):
       self.Work_Preview.add_component(Spacer(height=20))
       dbcount += 1
     
-    #cheeky lil average update
-    if not anvil.server.call('tutor_perms'):
-      marklist = 0
-      totalwork = 0
-      for row in app_tables.finishedhomeworkfiles.search():
-        if row['Uploader'] != currentuser: continue
-        if row['Marks'] is None: continue
-        markgiven = int(row['Marks'])
-        tmarkrow = app_tables.homeworkfiles.get(Homework_Title=row['Homework_Title'])
-        totalmarks = int(tmarkrow["Total_Marks"])
-        percentage = round(markgiven/totalmarks, 1) * 100
-        marklist += percentage
-        totalwork+=1
-      if totalwork != 0: marklist/=totalwork
-      currentuserhwdata['Average Mark'] = marklist
-
     
   @handle("Homework_Returned_Container", "show")
   def Homework_Returned_Container_show(self, **event_args):
@@ -210,5 +214,7 @@ class Dashboard_Page(Dashboard_PageTemplate):
   def statistics_redirect_click(self, **event_args):
     """This method is called when the button is clicked"""
     open_form('Statistics_Page')
+
+
 
   
