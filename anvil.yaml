@@ -155,6 +155,10 @@ db_schema:
       client_hidden: false
       name: Name
       type: string
+    - admin_ui: {order: 7, width: 200}
+      client_hidden: true
+      name: confirmed_email
+      type: bool
     indexes: []
     server: full
     title: Users
@@ -173,9 +177,15 @@ services:
 - client_config: {enable_v2: true}
   server_config: {}
   source: /runtime/services/tables.yml
-- client_config: {allow_signup: true, confirm_email: false, enable_automatically: false, require_secure_passwords: false, use_email: true}
+- client_config: {allow_signup: true, confirm_email: true, enable_automatically: false, require_secure_passwords: false, use_email: true}
   server_config:
     email_content:
+      confirm_address:
+        html: |-
+          <p>Thanks for registering your account with us. Please click the following link to confirm that this is your account:</p>
+          <p>{{confirm_link}}</p>
+          <p>Thanks,</p>
+          <p>The team</p>
       reset_password:
         html: |-
           <p>Hi there,</p>

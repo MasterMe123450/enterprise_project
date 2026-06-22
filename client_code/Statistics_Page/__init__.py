@@ -114,6 +114,7 @@ class Statistics_Page(Statistics_PageTemplate):
     topiclist = []
     for key in hwlist.keys():
       topic = app_tables.homeworkfiles.get(Homework_Title=key)
+      if topic is None: continue
       topiclist.append(topic['Topic'])
       if topic['Topic'] == "mixed":
         mixedtopiclist = topic["Topics_Marks"]
