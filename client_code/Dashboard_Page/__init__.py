@@ -14,6 +14,7 @@ currentuserhwdata = app_tables.homework.get(Student=currentuser)
 hwlist = currentuserhwdata["Homework_List"]
 donecheckrow = app_tables.homework.get(Student=currentuser)
 donechecklist = donecheckrow['Homework_List']
+rowscheck = app_tables.homeworkfiles.search()
 class Dashboard_Page(Dashboard_PageTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
@@ -21,14 +22,12 @@ class Dashboard_Page(Dashboard_PageTemplate):
     #check and give special tutor access 
     if anvil.server.call('tutor_perms'):
       self.tutor_redirect.visible = True
-
     #cheeky lil average update
     if not anvil.server.call('tutor_perms'):
       marklist = 0
       totalwork = 0
       for row in app_tables.finishedhomeworkfiles.search():
-        if row['Uploader'] != currentuser: continue
-        if row['Marks'] is None: continue
+        if row['Uploader'] != currentuser or row['Marks'] is None: continue
         markgiven = int(row['Marks'])
         tmarkrow = app_tables.homeworkfiles.get(Homework_Title=row['Homework_Title'])
         totalmarks = int(tmarkrow["Total_Marks"])
@@ -103,12 +102,12 @@ class Dashboard_Page(Dashboard_PageTemplate):
     #maybe max of 3? yep 3 is good!
     dbcap = 3
     dbcount = 1
-    for row in app_tables.homeworkfiles.search():
+    for row in rowscheck:
       if dbcount > dbcap: return #if at cap do not show
         #create temp variables
       hwtitle = row['Homework_Title']
       #if homework file exists
-      if donechecklist is None: continue
+      if donechecklist is None: return
       if hwtitle in donechecklist:
         donecheck = donechecklist[hwtitle]
       else: continue
@@ -131,7 +130,7 @@ class Dashboard_Page(Dashboard_PageTemplate):
     #cap of 3 items shown
     dbcap = 3
     dbcount = 1
-    for row in app_tables.homeworkfiles.search():
+    for row in rowscheck:
       #create temp variables
       hwtitle = row['Homework_Title']
       #if exists
