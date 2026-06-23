@@ -222,12 +222,13 @@ class Dashboard_Page(Dashboard_PageTemplate):
     """This method is called when the button is clicked"""
     self.tmptestlbl.visible = True
     newlist = {}
-    etuser = app_tables.users.get(Name="Ethan Tay")
-    testrow = app_tables.homework.get_by_id()
-    currentuserhwdata["Homework_List"] = newlist 
+    for row in app_tables.homeworkfiles.search():
+      title = row['Homework_Title']
+      newlist[title] = 0
+    currentuserhwdata['Homework_List'] = newlist
     anvil.users.logout()
     open_form('LogIn_Page')
-
+    
 
 
   
