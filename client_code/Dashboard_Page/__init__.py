@@ -217,6 +217,18 @@ class Dashboard_Page(Dashboard_PageTemplate):
     """This method is called when the button is clicked"""
     open_form('Statistics_Page')
 
+  @handle("test_button", "click")
+  def test_button_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    self.tmptestlbl.visible = True
+    newlist = {}
+    for row in app_tables.homeworkfiles.search():
+      title = row["Homework_Title"]
+      newlist[title] = 0
+    currentuserhwdata["Homework_List"] = newlist 
+    anvil.users.logout()
+    open_form('LogIn_Page')
+
 
 
   
