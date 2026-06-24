@@ -46,7 +46,23 @@ class Homework_Page(Homework_PageTemplate):
         dd = dd.split(" ")
         ddlbl = Label(text = "Due: " + str(dd[0]), align="center")
         xyp.add_component(ddlbl, x=20, y=30)
-  
+
+        topiclblcontent = row['Topic']
+        if topiclblcontent == "mixed":
+          topicblbtext = []
+          topiclblcontent = row['Topics_Marks']
+          for key in topiclblcontent.keys():
+            topicblbtext.append(key)
+          topiclbltextf = str(topicblbtext).replace("[", "")
+          topiclblcontentfi = topiclbltextf.replace("]", "")
+          topiclblcontentfix = topiclblcontentfi.replace("'", "")
+          xyp.add_component(Label(text="Topics: " + topiclblcontentfix), x=20, y=50)
+        else:
+          xyp.add_component(Label(text="Topic: " + topiclblcontent), x=20, y=50)
+
+        marks = row['Total_Marks']
+        xyp.add_component(Label(text="Total Marks: " + str(marks)),x=20,y=70)
+        
         btn = Button(text="Submit", align="right", background="#EADDFF")
         btn.set_event_handler('click', self.redirect)
         xyp.add_component(btn, x=10, y=200)
@@ -79,6 +95,22 @@ class Homework_Page(Homework_PageTemplate):
       ddlbl = Label(text = "Due: " + str(dd[0]), align="center")
       xyp.add_component(ddlbl, x=20, y=30)
 
+      topiclblcontent = row['Topic']
+      if topiclblcontent == "mixed":
+        topicblbtext = []
+        topiclblcontent = row['Topics_Marks']
+        for key in topiclblcontent.keys():
+          topicblbtext.append(key)
+        topiclbltextf = str(topicblbtext).replace("[", "")
+        topiclblcontentfi = topiclbltextf.replace("]", "")
+        topiclblcontentfix = topiclblcontentfi.replace("'", "")
+        xyp.add_component(Label(text="Topics: " + topiclblcontentfix), x=20, y=50)
+      else:
+        xyp.add_component(Label(text="Topic: " + topiclblcontent), x=20, y=50)
+
+      marks = row['Total_Marks']
+      xyp.add_component(Label(text="Total Marks: " + str(marks)),x=20,y=70)
+      
       clbl = Label(text = "Congrats!", align= "center")
       xyp.add_component(clbl, x=20, y=202)
       
@@ -106,6 +138,21 @@ class Homework_Page(Homework_PageTemplate):
 
       titlelbl = Label(text = row["Homework_Title"],align = "center")
       xyp.add_component(titlelbl, x=20, y=10)
+
+      topiclblcontent = row['Topic']
+      if topiclblcontent == "mixed":
+        topicblbtext = []
+        topiclblcontent = row['Topics_Marks']
+        for key in topiclblcontent.keys():
+          topicblbtext.append(key)
+        topiclbltextf = str(topicblbtext).replace("[", "")
+        topiclblcontentfi = topiclbltextf.replace("]", "")
+        topiclblcontentfix = topiclblcontentfi.replace("'", "")
+        xyp.add_component(Label(text="Topics: " + topiclblcontentfix), x=20, y=30)
+      else:
+        xyp.add_component(Label(text="Topic: " + topiclblcontent), x=20, y=30)
+        
+        
       
       mark = markedrow['Marks']
       marklbl = Label(text = "Mark: " + str(mark) + "/" + str(row['Total_Marks']), align= "center")
