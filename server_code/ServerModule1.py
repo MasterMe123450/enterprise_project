@@ -17,7 +17,7 @@ import anvil.server
 # def say_hello(name):
 #   print("Hello, " + name + "!")
 #   return 42
-tutor = ['ethan.tay1@education.nsw.gov.au']
+tutor = ['shizhong.song4@education.nsw.gov.au']
 @anvil.server.callable
 def tutor_perms():
   if anvil.users.get_user() is None:

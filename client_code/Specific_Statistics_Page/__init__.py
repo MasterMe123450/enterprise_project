@@ -33,6 +33,7 @@ class Specific_Statistics_Page(Specific_Statistics_PageTemplate):
     #The marklist(tm)
     for row in app_tables.finishedhomeworkfiles.search():
       if row['Homework_Title'] == self.Selection_Dropdown.selected_value:
+        if row['Marks'] is None: continue
         userrow = row['Uploader']
         user = userrow['email']
         if anvil.server.call('remove_tutors', user): continue
