@@ -79,7 +79,7 @@ components:
     type: Button
   - layout_properties: {grid_position: 'HIEIXV,LBQHNH'}
     name: score_plot
-    properties: {visible: false}
+    properties: {visible: true}
     type: Plot
   - layout_properties: {grid_position: 'EQVIVN,QAEZFX'}
     name: spacer_1
