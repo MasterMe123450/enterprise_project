@@ -33,9 +33,10 @@ class Tutor_Page(Tutor_PageTemplate):
         row.delete()
     for row in app_tables.homework.search():
       hwlist = row['Homework_List']
-      if hwrow in hwlist:
-        hwlist.pop(hwrow['Homework_Title'])
-        row['Homework_List'] = hwlist
+      if hwlist is not None:
+        if hwrow in hwlist:
+          hwlist.pop(hwrow['Homework_Title'])
+          row['Homework_List'] = hwlist
 
   
   @handle("doohickey_button", "click")
