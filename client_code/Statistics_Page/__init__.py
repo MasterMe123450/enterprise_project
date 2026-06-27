@@ -157,12 +157,13 @@ class Statistics_Page(Statistics_PageTemplate):
           for key in mixeddict.keys():
             if key == topic:
               userhwrow2 = app_tables.finishedhomeworkfiles.get(Homework_Title=row['Homework_Title'], Uploader=currentuser)
-              if userhwrow2["Marks"] is not None:
-                totalmark = mixeddict[key]
-                usermarkdict = userhwrow2['Topics_Marks']
-                topicmark = usermarkdict[key]
-                topictotal += topicmark/totalmark
-                totaltasks += 1
+              if userhwrow2 is not None:
+                if userhwrow2["Marks"] is not None:
+                  totalmark = mixeddict[key]
+                  usermarkdict = userhwrow2['Topics_Marks']
+                  topicmark = usermarkdict[key]
+                  topictotal += topicmark/totalmark
+                  totaltasks += 1
 
         #Single topic worksheet
         if row['Topic'] == topic:
