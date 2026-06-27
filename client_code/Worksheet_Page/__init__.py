@@ -27,6 +27,7 @@ class Worksheet_Page(Worksheet_PageTemplate):
   @handle("worksheet_container", "show")
   def worksheet_container_show(self, **event_args):
     """This method is called when the FlowPanel is shown on the screen"""
+    haswork = False
     for row in app_tables.permanenthomeworkfiles.search():
       xyp = XYPanel(width=250, height=250, border="solid 2px")
       self.worksheet_container.add_component(xyp)
@@ -36,6 +37,10 @@ class Worksheet_Page(Worksheet_PageTemplate):
 
       dlink = Link(text="Download", align = "left", url=row['Worksheet_File'])
       xyp.add_component(dlink, x=93+8/11, y=202)
+      haswork = True
+    if not haswork:
+      self.label_3.text = "Sorry, there are no available worksheets. Check back later!"
+      self.worksheet_container.visible = False
   
     #Sidebar Navigation
   @handle("dashboard_redirect", "click")

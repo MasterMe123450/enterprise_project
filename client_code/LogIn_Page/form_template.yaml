@@ -3,15 +3,15 @@ components:
   name: navbar_links
   properties: {}
   type: FlowPanel
+- layout_properties: {slot: default}
+  name: label_1
+  properties: {bold: true, text: 'BEAM portal landing page. If you do not get a log in form or redirection, reload the page.'}
+  type: Label
 - components: []
-  layout_properties: {slot: title}
+  layout_properties: {slot: top-left-btn}
   name: content_panel
   properties: {}
   type: ColumnPanel
-- layout_properties: {slot: default}
-  name: label_1
-  properties: {text: 'BEAM portal landing page, if you do not get an automatic login form or redirection, reload'}
-  type: Label
 container:
   properties: {html: '@theme:standard-page.html'}
   type: HtmlTemplate

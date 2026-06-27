@@ -94,6 +94,7 @@ class Dashboard_Page(Dashboard_PageTemplate):
       self.Homework_Overdue.background = "crimson"
     if currentuserhwdata["Work Returned"]>0:
       self.Homework_Returned.background = "#90EE90"
+    
   
   @handle("Work_Preview", "show")
   def Work_Preview_show(self, **event_args):

@@ -125,9 +125,17 @@ class Statistics_Page(Statistics_PageTemplate):
   def Show_TBT_plot_click(self, **event_args):
     """This method is called when the button is clicked"""
     #Create topic by topic data
+    #Toggle the graph
+    if self.TBT_Plot.visible:
+      self.TBT_Plot.visible = False
+    else:
+      self.TBT_Plot.visible = True
     userhwrow = app_tables.homework.get(Student=currentuser)
     hwlist = userhwrow['Homework_List']
     topiclist = []
+    if hwlist is None: 
+      self.nulllbl.visible = True
+      return
     for key in hwlist.keys():
       topic = app_tables.homeworkfiles.get(Homework_Title=key)
       if topic is None: continue
@@ -174,11 +182,7 @@ class Statistics_Page(Statistics_PageTemplate):
           topicbreakdown["No Topic"] = str(topicaverage) + "%"
     #anything from a "mixed" worksheet that wasn't originally a topic on the topic list is literally just lying just letting you know!
 
-    #Toggle the graph
-    if self.TBT_Plot.visible:
-      self.TBT_Plot.visible = False
-    else:
-      self.TBT_Plot.visible = True
+
       
     #create graph 
     xdata = []
